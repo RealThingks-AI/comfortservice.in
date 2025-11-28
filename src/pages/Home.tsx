@@ -6,13 +6,8 @@ import { TestimonialCard } from "@/components/TestimonialCard";
 import { CONTACT_INFO, SERVICES } from "@/config/contact";
 import { testimonials } from "@/data/staticData";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { motion, useScroll, useTransform } from "framer-motion";
 
 const Home = () => {
-  const { scrollY } = useScroll();
-  const heroY = useTransform(scrollY, [0, 500], [0, 150]);
-  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
-
   const servicesRef = useScrollAnimation();
   const whyUsRef = useScrollAnimation();
   const processRef = useScrollAnimation();
@@ -32,11 +27,8 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-accent section-padding relative overflow-hidden">
-        <motion.div 
-          className="container-wide relative z-10"
-          style={{ y: heroY, opacity: heroOpacity }}
-        >
+      <section className="bg-accent section-padding">
+        <div className="container-wide">
           <div className="text-center max-w-2xl mx-auto">
             <h1 className="mb-3">Fast, Reliable AC Service in Pune & PCMC</h1>
             <p className="text-muted-foreground mb-6">
@@ -59,7 +51,7 @@ const Home = () => {
               </Button>
             </div>
           </div>
-        </motion.div>
+        </div>
       </section>
 
       {/* Key Services */}
@@ -68,34 +60,16 @@ const Home = () => {
           <div ref={servicesRef.ref} className={`scroll-animate ${servicesRef.isVisible ? 'visible' : ''}`}>
             <h2 className="text-center mb-8">Our Services</h2>
           </div>
-          <motion.div 
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={{
-              visible: {
-                transition: { staggerChildren: 0.08 }
-              }
-            }}
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {SERVICES.slice(0, 6).map((service) => (
-              <motion.div
+              <ServiceCard
                 key={service.id}
-                variants={{
-                  hidden: { opacity: 0, y: 30 },
-                  visible: { opacity: 1, y: 0 }
-                }}
-                transition={{ duration: 0.5 }}
-              >
-                <ServiceCard
-                  name={service.name}
-                  description={service.description}
-                  startingPrice={service.startingPrice}
-                />
-              </motion.div>
+                name={service.name}
+                description={service.description}
+                startingPrice={service.startingPrice}
+              />
             ))}
-          </motion.div>
+          </div>
           <div className="text-center mt-6">
             <Button asChild variant="outline">
               <Link to="/services">View All Services</Link>
@@ -110,7 +84,7 @@ const Home = () => {
           <div ref={whyUsRef.ref} className={`scroll-animate ${whyUsRef.isVisible ? 'visible' : ''}`}>
             <h2 className="text-center mb-8">Why Choose Us</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
                 icon: Users,
@@ -151,7 +125,7 @@ const Home = () => {
           <div ref={processRef.ref} className={`scroll-animate ${processRef.isVisible ? 'visible' : ''}`}>
             <h2 className="text-center mb-8">How It Works</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { step: "1", title: "Book Online or Call", desc: "Schedule via website or phone" },
               { step: "2", title: "Technician Visits", desc: "Expert arrives at your location" },
@@ -176,35 +150,17 @@ const Home = () => {
           <div ref={testimonialsRef.ref} className={`scroll-animate ${testimonialsRef.isVisible ? 'visible' : ''}`}>
             <h2 className="text-center mb-8">What Our Customers Say</h2>
           </div>
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-3 gap-4"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={{
-              visible: {
-                transition: { staggerChildren: 0.1 }
-              }
-            }}
-          >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {homeTestimonials.map((testimonial) => (
-              <motion.div
+              <TestimonialCard
                 key={testimonial.id}
-                variants={{
-                  hidden: { opacity: 0, scale: 0.95 },
-                  visible: { opacity: 1, scale: 1 }
-                }}
-                transition={{ duration: 0.4 }}
-              >
-                <TestimonialCard
-                  name={testimonial.name}
-                  rating={testimonial.rating}
-                  review={testimonial.review_text}
-                  city={testimonial.city || undefined}
-                />
-              </motion.div>
+                name={testimonial.name}
+                rating={testimonial.rating}
+                review={testimonial.review_text}
+                city={testimonial.city || undefined}
+              />
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 

@@ -1,19 +1,10 @@
 import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { PricingCardSkeleton } from "@/components/PricingCardSkeleton";
 import { Link } from "react-router-dom";
 import { CONTACT_INFO } from "@/config/contact";
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
 
 const Pricing = () => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 300);
-    return () => clearTimeout(timer);
-  }, []);
   const handleWhatsApp = (service: string) => {
     const message = encodeURIComponent(`Hi! I'd like to know more about pricing for ${service}.`);
     window.open(`https://wa.me/${CONTACT_INFO.whatsapp}?text=${message}`, "_blank");
@@ -58,33 +49,9 @@ const Pricing = () => {
           </p>
         </div>
 
-        {isLoading ? (
-          <div className="space-y-4">
-            {Array.from({ length: 3 }).map((_, index) => (
-              <PricingCardSkeleton key={index} />
-            ))}
-          </div>
-        ) : (
-          <motion.div 
-            className="space-y-4"
-            initial="hidden"
-            animate="visible"
-            variants={{
-              visible: {
-                transition: { staggerChildren: 0.1 }
-              }
-            }}
-          >
-            {pricingData.map((category, index) => (
-            <motion.div
-              key={index}
-              variants={{
-                hidden: { opacity: 0, x: -20 },
-                visible: { opacity: 1, x: 0 }
-              }}
-              transition={{ duration: 0.4 }}
-            >
-              <Card>
+        <div className="space-y-4">
+          {pricingData.map((category, index) => (
+            <Card key={index}>
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg">{category.category}</CardTitle>
                 <CardDescription className="text-xs">Professional service with warranty included</CardDescription>
@@ -92,9 +59,9 @@ const Pricing = () => {
               <CardContent>
                 <div className="divide-y divide-border">
                   {category.items.map((item, idx) => (
-                    <div key={idx} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 py-3 first:pt-0 last:pb-0">
+                    <div key={idx} className="flex items-center justify-between py-3 first:pt-0 last:pb-0">
                       <span className="text-sm font-medium">{item.name}</span>
-                      <div className="flex items-center justify-between sm:justify-end gap-2">
+                      <div className="flex items-center gap-2">
                         <span className="text-primary font-semibold text-sm">{item.price}</span>
                         <div className="flex gap-1">
                           <Button asChild size="sm" variant="outline" className="h-7 px-2 text-xs">
@@ -115,10 +82,8 @@ const Pricing = () => {
                 </div>
               </CardContent>
             </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-        )}
+          ))}
+        </div>
 
         <div className="mt-8 grid md:grid-cols-2 gap-4">
           <div className="bg-accent rounded-lg p-5">

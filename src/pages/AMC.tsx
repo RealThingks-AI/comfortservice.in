@@ -1,7 +1,6 @@
 import { Check, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { PricingCardSkeleton } from "@/components/PricingCardSkeleton";
 import { AMC_PLANS, CONTACT_INFO } from "@/config/contact";
 import { Link } from "react-router-dom";
 import {
@@ -10,16 +9,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
 
 const AMC = () => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 300);
-    return () => clearTimeout(timer);
-  }, []);
   const handleWhatsApp = (planName: string) => {
     const message = encodeURIComponent(`Hi! I'm interested in the ${planName} AMC plan. Please provide more details.`);
     window.open(`https://wa.me/${CONTACT_INFO.whatsapp}?text=${message}`, "_blank");
@@ -51,33 +42,9 @@ const AMC = () => {
           </p>
         </div>
 
-        {isLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-10">
-            {Array.from({ length: 3 }).map((_, index) => (
-              <PricingCardSkeleton key={index} />
-            ))}
-          </div>
-        ) : (
-          <motion.div 
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-10"
-            initial="hidden"
-            animate="visible"
-            variants={{
-              visible: {
-                transition: { staggerChildren: 0.12 }
-              }
-            }}
-          >
-            {AMC_PLANS.map((plan, index) => (
-            <motion.div
-              key={index}
-              variants={{
-                hidden: { opacity: 0, scale: 0.9 },
-                visible: { opacity: 1, scale: 1 }
-              }}
-              transition={{ duration: 0.4 }}
-            >
-              <Card
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+          {AMC_PLANS.map((plan, index) => (
+            <Card
               key={index}
               className={`card-hover ${plan.popular ? "border-primary shadow-md ring-1 ring-primary/20" : ""}`}
             >
@@ -113,11 +80,9 @@ const AMC = () => {
                   <MessageCircle className="w-4 h-4" />
                 </Button>
               </CardFooter>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-        )}
+            </Card>
+          ))}
+        </div>
 
         <div className="bg-accent rounded-lg p-5 mb-8">
           <h2 className="mb-4">AMC Benefits</h2>
