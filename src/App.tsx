@@ -6,6 +6,7 @@ import { AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import GoogleReviewWidget from "@/components/GoogleReviewWidget";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { PageTransition } from "@/components/PageTransition";
@@ -55,6 +56,7 @@ const App = () => (
         </main>
         <Footer />
         <WhatsAppButton />
+        <GoogleReviewWidget />
       </div>
     </BrowserRouter>
   </TooltipProvider>

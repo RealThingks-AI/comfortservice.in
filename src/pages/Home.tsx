@@ -205,6 +205,17 @@ const Home = () => {
               </motion.div>
             ))}
           </motion.div>
+          <div className="text-center mt-6">
+            <Button asChild variant="outline">
+              <a 
+                href="https://www.google.com/search?q=comfort+technical+services+pune" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                View All Reviews on Google
+              </a>
+            </Button>
+          </div>
         </div>
       </section>
 
