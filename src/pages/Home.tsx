@@ -161,6 +161,13 @@ const Home = () => {
               />
             ))}
           </div>
+          <div className="text-center mt-6">
+            <Button asChild variant="outline">
+              <a href="https://share.google/XJivVac422OwnkpZo" target="_blank" rel="noopener noreferrer">
+                View All Reviews on Google
+              </a>
+            </Button>
+          </div>
         </div>
       </section>
 

@@ -61,13 +61,27 @@ const About = () => {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          {stats.map((stat, index) => (
-            <div key={index} className="text-center p-4 bg-card rounded-lg border border-border">
-              <stat.icon className="w-6 h-6 text-primary mx-auto mb-2" />
-              <div className="text-2xl font-bold text-primary mb-0.5">{stat.value}</div>
-              <div className="text-xs text-muted-foreground">{stat.label}</div>
-            </div>
-          ))}
+          {stats.map((stat, index) => {
+            const isGoogleStat = stat.label === "Google Reviews" || stat.label === "Google Rating";
+            const StatWrapper = isGoogleStat ? "a" : "div";
+            const linkProps = isGoogleStat ? {
+              href: "https://share.google/XJivVac422OwnkpZo",
+              target: "_blank",
+              rel: "noopener noreferrer",
+              className: "block text-center p-4 bg-card rounded-lg border border-border card-hover transition-all"
+            } : {
+              className: "text-center p-4 bg-card rounded-lg border border-border"
+            };
+
+            return (
+              <StatWrapper key={index} {...linkProps}>
+                <stat.icon className="w-6 h-6 text-primary mx-auto mb-2" />
+                <div className="text-2xl font-bold text-primary mb-0.5">{stat.value}</div>
+                <div className="text-xs text-muted-foreground">{stat.label}</div>
+                {isGoogleStat && <div className="text-xs text-primary mt-1">View on Google →</div>}
+              </StatWrapper>
+            );
+          })}
         </div>
 
         <div className="mb-12">
