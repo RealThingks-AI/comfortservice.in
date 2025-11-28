@@ -8,7 +8,7 @@ const About = () => {
     { icon: Award, label: "Years Experience", value: 7, suffix: "+" },
     { icon: Users, label: "AC Units Serviced", value: 10000, suffix: "+" },
     { icon: ThumbsUp, label: "Google Reviews", value: 57, suffix: "" },
-    { icon: Clock, label: "Google Rating", value: 5.0, suffix: "/5", isDecimal: true }
+    { icon: Clock, label: "Google Rating", value: 4.7, suffix: "/5", isDecimal: true }
   ];
 
   const milestones = [
