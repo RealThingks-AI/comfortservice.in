@@ -1,32 +1,17 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MessageCircle } from "lucide-react";
 import { CONTACT_INFO } from "@/config/contact";
+import { serviceAreas } from "@/data/staticData";
 
 const ServiceAreas = () => {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
 
-  const { data: areas, isLoading } = useQuery({
-    queryKey: ["service-areas"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("service_areas")
-        .select("*")
-        .eq("is_active", true)
-        .order("city", { ascending: true })
-        .order("area_name", { ascending: true });
-      if (error) throw error;
-      return data;
-    }
-  });
-
-  const cities = [...new Set(areas?.map((area) => area.city))];
+  const cities = [...new Set(serviceAreas.map((area) => area.city))];
   const filteredAreas = selectedCity
-    ? areas?.filter((area) => area.city === selectedCity)
-    : areas;
+    ? serviceAreas.filter((area) => area.city === selectedCity)
+    : serviceAreas;
 
   const handleWhatsApp = () => {
     const message = encodeURIComponent("Hi! I'd like to check if you service my area.");
@@ -65,19 +50,13 @@ const ServiceAreas = () => {
         </div>
 
         {/* Areas List */}
-        {isLoading ? (
-          <div className="text-center py-8">
-            <p className="text-muted-foreground text-sm">Loading service areas...</p>
-          </div>
-        ) : (
-          <div className="flex flex-wrap gap-2 justify-center">
-            {filteredAreas?.map((area) => (
-              <Badge key={area.id} variant="secondary" className="px-3 py-1.5 text-xs">
-                {area.area_name}
-              </Badge>
-            ))}
-          </div>
-        )}
+        <div className="flex flex-wrap gap-2 justify-center">
+          {filteredAreas.map((area) => (
+            <Badge key={area.id} variant="secondary" className="px-3 py-1.5 text-xs">
+              {area.area_name}
+            </Badge>
+          ))}
+        </div>
 
         {/* Not Listed Section */}
         <div className="mt-10 bg-accent rounded-lg p-6 text-center">

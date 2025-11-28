@@ -1,20 +1,20 @@
-import { Users, Award, Clock, ThumbsUp, Building2, FileText, Shield, Rocket, Target, Star, TrendingUp } from "lucide-react";
+import { Users, Award, Clock, ThumbsUp, Building2, Shield, Rocket, Target, Star, TrendingUp } from "lucide-react";
 import { CONTACT_INFO } from "@/config/contact";
 
 const About = () => {
   const stats = [
     { icon: Award, label: "Years Experience", value: "7+" },
     { icon: Users, label: "AC Units Serviced", value: "10,000+" },
-    { icon: ThumbsUp, label: "Google Reviews", value: "57" },
-    { icon: Clock, label: "Google Rating", value: "5.0/5" }
+    { icon: ThumbsUp, label: "Happy Customers", value: "1,000+" },
+    { icon: Clock, label: "Service Hours", value: "24/7" }
   ];
 
   const milestones = [
-    { year: "2018", title: "Foundation", description: "Started Comfort Technical Services in Pune with a vision to provide reliable AC services", icon: Rocket },
-    { year: "2019", title: "First 500 Customers", description: "Reached our first 500 satisfied customers and expanded service coverage across Pune", icon: Target },
-    { year: "2020", title: "GST Registration", description: "Became a registered GST business, offering professional invoices to all customers", icon: FileText },
+    { year: "2018", title: "Foundation", description: "Started Comfort Technical Service in Pune with a vision to provide reliable AC services", icon: Rocket },
+    { year: "2019", title: "First 500 Customers", description: "Reached first 500 satisfied customers and expanded service coverage across Pune", icon: Target },
+    { year: "2020", title: "Corporate Partnerships", description: "Started working with multiple companies in Pune area for AC services", icon: Building2 },
     { year: "2021", title: "PCMC Expansion", description: "Extended services to PCMC area including Akurdi, Chinchwad, and surrounding regions", icon: TrendingUp },
-    { year: "2023", title: "10,000+ Services", description: "Crossed the milestone of 10,000+ AC units serviced with 5-star customer ratings", icon: Star },
+    { year: "2023", title: "10,000+ Services", description: "Crossed the milestone of 10,000+ AC units serviced with excellent customer satisfaction", icon: Star },
     { year: "2024", title: "AMC Programs", description: "Launched comprehensive Annual Maintenance Contract programs for homes and businesses", icon: Award }
   ];
 
@@ -24,7 +24,6 @@ const About = () => {
         <div className="text-center mb-10">
           <h1 className="mb-2">About {CONTACT_INFO.companyName}</h1>
           <p className="text-muted-foreground max-w-xl mx-auto text-sm">Your trusted partner for professional air conditioning services in Pune & PCMC</p>
-          {CONTACT_INFO.ownerName && <p className="text-muted-foreground text-sm mt-1">Proprietor: <span className="font-medium text-foreground">{CONTACT_INFO.ownerName}</span></p>}
         </div>
 
         <div className="max-w-2xl mx-auto mb-12">
@@ -95,22 +94,17 @@ const About = () => {
         </div>
 
         <div>
-          <h2 className="text-center mb-6">Registered & Verified Business</h2>
-          <div className="grid md:grid-cols-3 gap-4 max-w-3xl mx-auto">
+          <h2 className="text-center mb-6">Professional Service</h2>
+          <div className="grid md:grid-cols-2 gap-4 max-w-2xl mx-auto">
             <div className="bg-card border border-border rounded-lg p-4 text-center">
               <Building2 className="w-8 h-8 text-primary mx-auto mb-2" />
-              <h3 className="text-sm font-semibold mb-1">GSTIN Registered</h3>
-              <p className="text-xs text-muted-foreground font-mono">{CONTACT_INFO.gstin}</p>
-            </div>
-            <div className="bg-card border border-border rounded-lg p-4 text-center">
-              <FileText className="w-8 h-8 text-primary mx-auto mb-2" />
-              <h3 className="text-sm font-semibold mb-1">PAN Verified</h3>
-              <p className="text-xs text-muted-foreground font-mono">{CONTACT_INFO.pan}</p>
+              <h3 className="text-sm font-semibold mb-1">Trusted in Pune</h3>
+              <p className="text-xs text-muted-foreground">Worked with multiple companies</p>
             </div>
             <div className="bg-card border border-border rounded-lg p-4 text-center">
               <Shield className="w-8 h-8 text-primary mx-auto mb-2" />
-              <h3 className="text-sm font-semibold mb-1">GST Invoices</h3>
-              <p className="text-xs text-muted-foreground">Proper GST invoices provided</p>
+              <h3 className="text-sm font-semibold mb-1">Service Warranty</h3>
+              <p className="text-xs text-muted-foreground">Quality guaranteed on all work</p>
             </div>
           </div>
         </div>
