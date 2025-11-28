@@ -6,8 +6,13 @@ import { TestimonialCard } from "@/components/TestimonialCard";
 import { CONTACT_INFO, SERVICES } from "@/config/contact";
 import { testimonials } from "@/data/staticData";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const Home = () => {
+  const { scrollY } = useScroll();
+  const heroY = useTransform(scrollY, [0, 500], [0, 150]);
+  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
+
   const servicesRef = useScrollAnimation();
   const whyUsRef = useScrollAnimation();
   const processRef = useScrollAnimation();
@@ -22,13 +27,16 @@ const Home = () => {
     window.open(`https://wa.me/${CONTACT_INFO.whatsapp}?text=${message}`, "_blank");
   };
 
-  const homeTestimonials = testimonials.filter((t) => t.show_on_home);
+  const homeTestimonials = testimonials.filter(t => t.show_on_home);
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-accent section-padding">
-        <div className="container-wide">
+      <section className="bg-accent section-padding relative overflow-hidden">
+        <motion.div 
+          className="container-wide relative z-10"
+          style={{ y: heroY, opacity: heroOpacity }}
+        >
           <div className="text-center max-w-2xl mx-auto">
             <h1 className="mb-3">Fast, Reliable AC Service in Pune & PCMC</h1>
             <p className="text-muted-foreground mb-6">
@@ -42,31 +50,52 @@ const Home = () => {
                 <Phone className="w-4 h-4" />
                 Call Now
               </Button>
-              <Button onClick={handleWhatsApp} className="gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white">
+              <Button
+                onClick={handleWhatsApp}
+                className="gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white"
+              >
                 <MessageCircle className="w-4 h-4" />
                 WhatsApp
               </Button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Key Services */}
       <section className="section-padding">
         <div className="container-wide">
-          <div ref={servicesRef.ref} className={`scroll-animate ${servicesRef.isVisible ? "visible" : ""}`}>
+          <div ref={servicesRef.ref} className={`scroll-animate ${servicesRef.isVisible ? 'visible' : ''}`}>
             <h2 className="text-center mb-8">Our Services</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <motion.div 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={{
+              visible: {
+                transition: { staggerChildren: 0.08 }
+              }
+            }}
+          >
             {SERVICES.slice(0, 6).map((service) => (
-              <ServiceCard
+              <motion.div
                 key={service.id}
-                name={service.name}
-                description={service.description}
-                startingPrice={service.startingPrice}
-              />
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                transition={{ duration: 0.5 }}
+              >
+                <ServiceCard
+                  name={service.name}
+                  description={service.description}
+                  startingPrice={service.startingPrice}
+                />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
           <div className="text-center mt-6">
             <Button asChild variant="outline">
               <Link to="/services">View All Services</Link>
@@ -78,31 +107,31 @@ const Home = () => {
       {/* Why Choose Us */}
       <section className="section-padding bg-accent">
         <div className="container-wide">
-          <div ref={whyUsRef.ref} className={`scroll-animate ${whyUsRef.isVisible ? "visible" : ""}`}>
+          <div ref={whyUsRef.ref} className={`scroll-animate ${whyUsRef.isVisible ? 'visible' : ''}`}>
             <h2 className="text-center mb-8">Why Choose Us</h2>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {[
               {
                 icon: Users,
                 title: "Experienced Team",
-                desc: CONTACT_INFO.experienceText,
+                desc: CONTACT_INFO.experienceText
               },
               {
                 icon: Clock,
                 title: "On-Time Service",
-                desc: "Same-day and next-day appointments available",
+                desc: "Same-day and next-day appointments available"
               },
               {
                 icon: CheckCircle,
                 title: "Transparent Pricing",
-                desc: "Clear quotes before work, no hidden charges",
+                desc: "Clear quotes before work, no hidden charges"
               },
               {
                 icon: Shield,
                 title: "Service Warranty",
-                desc: "Quality guaranteed with service warranty",
-              },
+                desc: "Quality guaranteed with service warranty"
+              }
             ].map((item, index) => (
               <div key={index} className="text-center">
                 <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -119,15 +148,15 @@ const Home = () => {
       {/* Process Steps */}
       <section className="section-padding">
         <div className="container-narrow">
-          <div ref={processRef.ref} className={`scroll-animate ${processRef.isVisible ? "visible" : ""}`}>
+          <div ref={processRef.ref} className={`scroll-animate ${processRef.isVisible ? 'visible' : ''}`}>
             <h2 className="text-center mb-8">How It Works</h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { step: "1", title: "Book Online or Call", desc: "Schedule via website or phone" },
               { step: "2", title: "Technician Visits", desc: "Expert arrives at your location" },
               { step: "3", title: "Diagnosis & Quote", desc: "Issue identified, quote provided" },
-              { step: "4", title: "Service Complete", desc: "Work done efficiently & cleanly" },
+              { step: "4", title: "Service Complete", desc: "Work done efficiently & cleanly" }
             ].map((item, index) => (
               <div key={index} className="text-center">
                 <div className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">
@@ -144,31 +173,38 @@ const Home = () => {
       {/* Testimonials */}
       <section className="section-padding bg-accent">
         <div className="container-wide">
-          <div ref={testimonialsRef.ref} className={`scroll-animate ${testimonialsRef.isVisible ? "visible" : ""}`}>
+          <div ref={testimonialsRef.ref} className={`scroll-animate ${testimonialsRef.isVisible ? 'visible' : ''}`}>
             <h2 className="text-center mb-8">What Our Customers Say</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-4"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={{
+              visible: {
+                transition: { staggerChildren: 0.1 }
+              }
+            }}
+          >
             {homeTestimonials.map((testimonial) => (
-              <TestimonialCard
+              <motion.div
                 key={testimonial.id}
-                name={testimonial.name}
-                rating={testimonial.rating}
-                review={testimonial.review_text}
-                city={testimonial.city || undefined}
-              />
-            ))}
-          </div>
-          <div className="text-center mt-6">
-            <Button asChild variant="outline">
-              <a
-                href="https://www.google.com/search?client=ms-android-vivo-terr1-rso2&sa=X&bih=784&hl=en-US&biw=392&cs=0&sca_esv=59038b22a1d9f5de&sxsrf=AE3TifPcvPLRYSIN7LHRqusGcIRrhzHXsg:1764324276529&kgmid=/g/11q45fwj8t&q=Comfort+Technical+Services&shndl=30&shem=damc,lcuae,uaasie,shrtsdl&source=sh/x/loc/uni/m1/1&kgs=ff7d11118a698925&utm_source=damc,lcuae,uaasie,shrtsdl,sh/x/loc/uni/m1/1#"
-                target="_blank"
-                rel="noopener noreferrer"
+                variants={{
+                  hidden: { opacity: 0, scale: 0.95 },
+                  visible: { opacity: 1, scale: 1 }
+                }}
+                transition={{ duration: 0.4 }}
               >
-                View All Reviews on Google
-              </a>
-            </Button>
-          </div>
+                <TestimonialCard
+                  name={testimonial.name}
+                  rating={testimonial.rating}
+                  review={testimonial.review_text}
+                  city={testimonial.city || undefined}
+                />
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
@@ -176,12 +212,17 @@ const Home = () => {
       <section className="section-padding-sm bg-primary text-primary-foreground">
         <div className="container-narrow text-center">
           <h2 className="text-primary-foreground mb-2">Ready to Book Your AC Service?</h2>
-          <p className="mb-6 opacity-90 text-sm">Get fast, professional service today. Call or WhatsApp us now!</p>
+          <p className="mb-6 opacity-90 text-sm">
+            Get fast, professional service today. Call or WhatsApp us now!
+          </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Button asChild variant="secondary">
               <Link to="/contact">Book Now</Link>
             </Button>
-            <Button onClick={handleWhatsApp} className="gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white">
+            <Button
+              onClick={handleWhatsApp}
+              className="gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white"
+            >
               <MessageCircle className="w-4 h-4" />
               WhatsApp
             </Button>
