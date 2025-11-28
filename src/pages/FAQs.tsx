@@ -1,5 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import {
   Accordion,
   AccordionContent,
@@ -9,26 +7,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { faqItems } from "@/data/staticData";
 
 const FAQs = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  const { data: faqs, isLoading } = useQuery({
-    queryKey: ["faqs"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("faq_items")
-        .select("*")
-        .order("sort_order", { ascending: true });
-      if (error) throw error;
-      return data;
-    }
-  });
-
-  const categories = [...new Set(faqs?.map((faq) => faq.category))];
+  const categories = [...new Set(faqItems.map((faq) => faq.category))];
   const filteredFaqs = selectedCategory
-    ? faqs?.filter((faq) => faq.category === selectedCategory)
-    : faqs;
+    ? faqItems.filter((faq) => faq.category === selectedCategory)
+    : faqItems;
 
   return (
     <div className="min-h-screen section-padding">
@@ -62,24 +49,18 @@ const FAQs = () => {
         </div>
 
         {/* FAQs */}
-        {isLoading ? (
-          <div className="text-center py-8">
-            <p className="text-muted-foreground text-sm">Loading FAQs...</p>
-          </div>
-        ) : (
-          <Accordion type="single" collapsible className="w-full">
-            {filteredFaqs?.map((faq, index) => (
-              <AccordionItem key={faq.id} value={`item-${index}`}>
-                <AccordionTrigger className="text-sm text-left py-3">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-sm text-muted-foreground pb-4">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        )}
+        <Accordion type="single" collapsible className="w-full">
+          {filteredFaqs.map((faq, index) => (
+            <AccordionItem key={faq.id} value={`item-${index}`}>
+              <AccordionTrigger className="text-sm text-left py-3">
+                {faq.question}
+              </AccordionTrigger>
+              <AccordionContent className="text-sm text-muted-foreground pb-4">
+                {faq.answer}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
 
         {/* Contact Section */}
         <div className="mt-10 bg-accent rounded-lg p-6 text-center">
