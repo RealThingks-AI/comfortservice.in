@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Phone, Mail, MapPin, MessageCircle, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, MessageCircle, Clock, Star, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import { CONTACT_INFO, SERVICES } from "@/config/contact";
 
 const Contact = () => {
@@ -43,34 +44,28 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Build WhatsApp message with form details
-      const message = `*New Service Booking*
+      const { error } = await supabase.from("service_bookings").insert([
+        {
+          name: formData.name.trim(),
+          phone: formData.phone.trim(),
+          email: formData.email.trim() || null,
+          service_type: formData.serviceType,
+          ac_type: formData.acType,
+          units: parseInt(formData.units),
+          preferred_date: formData.preferredDate || null,
+          preferred_time_slot: formData.preferredTimeSlot || null,
+          address: formData.address.trim(),
+          city: formData.city.trim(),
+          pincode: formData.pincode.trim() || null,
+          preferred_contact_mode: formData.preferredContactMode,
+          notes: formData.notes.trim() || null
+        }
+      ]);
+
+      if (error) throw error;
+
+      toast.success("Booking submitted successfully! We will contact you shortly.");
       
-*Name:* ${formData.name}
-*Phone:* ${formData.phone}
-${formData.email ? `*Email:* ${formData.email}` : ''}
-
-*Service:* ${formData.serviceType}
-*AC Type:* ${formData.acType}
-*Units:* ${formData.units}
-
-${formData.preferredDate ? `*Preferred Date:* ${formData.preferredDate}` : ''}
-${formData.preferredTimeSlot ? `*Time Slot:* ${formData.preferredTimeSlot}` : ''}
-
-*Address:* ${formData.address}
-*City:* ${formData.city}
-${formData.pincode ? `*Pincode:* ${formData.pincode}` : ''}
-
-*Contact via:* ${formData.preferredContactMode}
-
-${formData.notes ? `*Notes:* ${formData.notes}` : ''}`;
-
-      // Open WhatsApp with the message
-      window.open(`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent(message)}`, "_blank");
-
-      toast.success("Opening WhatsApp to send booking details!");
-      
-      // Reset form
       setFormData({
         name: "",
         phone: "",
@@ -87,8 +82,8 @@ ${formData.notes ? `*Notes:* ${formData.notes}` : ''}`;
         notes: ""
       });
     } catch (error) {
-      console.error("Error:", error);
-      toast.error("Unable to open WhatsApp. Please contact us directly.");
+      console.error("Error submitting booking:", error);
+      toast.error("Failed to submit booking. Please try again or contact us directly.");
     } finally {
       setIsSubmitting(false);
     }
@@ -161,6 +156,25 @@ ${formData.notes ? `*Notes:* ${formData.notes}` : ''}`;
                   <div>
                     <p className="text-sm font-medium">Working Hours</p>
                     <p className="text-xs text-muted-foreground">{CONTACT_INFO.workingHours}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 pt-2 border-t border-border">
+                  <Star className="w-4 h-4 text-amber-500 mt-0.5 flex-shrink-0 fill-amber-500" />
+                  <div>
+                    <p className="text-sm font-medium">Google Rating</p>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-semibold">{CONTACT_INFO.googleRating}/5</span>
+                      <span className="text-xs text-muted-foreground">({CONTACT_INFO.googleReviews} reviews)</span>
+                      <a 
+                        href={CONTACT_INFO.googleMapsUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-primary hover:underline inline-flex items-center gap-0.5 text-xs"
+                      >
+                        View <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </CardContent>
@@ -361,12 +375,8 @@ ${formData.notes ? `*Notes:* ${formData.notes}` : ''}`;
                 </div>
 
                 <Button type="submit" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? "Opening WhatsApp..." : "Send via WhatsApp"}
+                  {isSubmitting ? "Submitting..." : "Submit Booking"}
                 </Button>
-                
-                <p className="text-xs text-center text-muted-foreground mt-2">
-                  This will open WhatsApp with your booking details
-                </p>
               </form>
             </CardContent>
           </Card>

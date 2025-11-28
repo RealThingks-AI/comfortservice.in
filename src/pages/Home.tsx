@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { ServiceCard } from "@/components/ServiceCard";
 import { TestimonialCard } from "@/components/TestimonialCard";
 import { CONTACT_INFO, SERVICES } from "@/config/contact";
-import { testimonials } from "@/data/staticData";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 const Home = () => {
   const handleCall = () => {
@@ -15,6 +16,19 @@ const Home = () => {
     const message = encodeURIComponent("Hello! I would like to book an AC service.");
     window.open(`https://wa.me/${CONTACT_INFO.whatsapp}?text=${message}`, "_blank");
   };
+
+  const { data: testimonials } = useQuery({
+    queryKey: ["testimonials-home"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("testimonials")
+        .select("*")
+        .eq("show_on_home", true)
+        .limit(3);
+      if (error) throw error;
+      return data;
+    }
+  });
 
   return (
     <div className="min-h-screen">
@@ -131,22 +145,24 @@ const Home = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="section-padding bg-accent">
-        <div className="container-wide">
-          <h2 className="text-center mb-8">What Our Customers Say</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {testimonials.map((testimonial) => (
-              <TestimonialCard
-                key={testimonial.id}
-                name={testimonial.name}
-                rating={testimonial.rating}
-                review={testimonial.review_text}
-                city={testimonial.city || undefined}
-              />
-            ))}
+      {testimonials && testimonials.length > 0 && (
+        <section className="section-padding bg-accent">
+          <div className="container-wide">
+            <h2 className="text-center mb-8">What Our Customers Say</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {testimonials.map((testimonial) => (
+                <TestimonialCard
+                  key={testimonial.id}
+                  name={testimonial.name}
+                  rating={testimonial.rating}
+                  review={testimonial.review_text}
+                  city={testimonial.city || undefined}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* CTA Section */}
       <section className="section-padding-sm bg-primary text-primary-foreground">
