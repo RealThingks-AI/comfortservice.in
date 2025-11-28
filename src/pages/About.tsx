@@ -65,7 +65,7 @@ const About = () => {
             const isGoogleStat = stat.label === "Google Reviews" || stat.label === "Google Rating";
             const StatWrapper = isGoogleStat ? "a" : "div";
             const linkProps = isGoogleStat ? {
-              href: "https://share.google/XJivVac422OwnkpZo",
+              href: "https://share.google/uId2AprpjGGgKEEN1",
               target: "_blank",
               rel: "noopener noreferrer",
               className: "block text-center p-4 bg-card rounded-lg border border-border card-hover transition-all"
