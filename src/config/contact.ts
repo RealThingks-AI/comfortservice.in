@@ -1,19 +1,19 @@
 export const CONTACT_INFO = {
-  companyName: "Comfort Technical Services",
-  ownerName: "Sagar Shinde",
+  companyName: "Comfort Technical Service",
+  ownerName: "Owner",
   phone: "+91 77450 46520",
   phone2: "+91 82083 46628",
-  whatsapp: "917745046520", // No spaces or dashes for WhatsApp API
-  email: "comforttechnicalservice8@gmail.com",
-  address: "Sr. No. 179, Flat No. 03, Panchatara Nagar, Akurdi, Pune, Maharashtra - 411035",
-  gstin: "27HEKPS5234F1Z4",
-  pan: "HEKPS5234F",
+  whatsapp: "917745046520",
+  email: "comfort@example.com",
+  address: "COMFORT TECHNICAL SERVICES, NIKHIL NIWAS, SURVEY NO.179, SHOP NO-02, FIRST FLOOR, NEAR GA, Pune, PIMPRI CHINCHWAD, MH 411035",
+  gstin: "",
+  pan: "",
   workingHours: "Open 24 Hours",
   establishedYear: 2018,
-  experienceText: "Serving Pune since 2018 with 7+ years of experience",
-  googleMapsUrl: "https://share.google/XJivVac422OwnkpZo",
+  experienceText: "Worked with multiple companies in Pune area",
+  googleMapsUrl: "",
   googleRating: 5.0,
-  googleReviews: 57
+  googleReviews: 0
 };
 
 export const SERVICES = [
