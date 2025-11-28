@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Phone, Mail, MapPin, MessageCircle, Clock, Star, ExternalLink } from "lucide-react";
+import { Phone, Mail, MapPin, MessageCircle, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,7 +7,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
 import { CONTACT_INFO, SERVICES } from "@/config/contact";
 
 const Contact = () => {
@@ -33,7 +32,7 @@ const Contact = () => {
     window.open(`https://wa.me/${CONTACT_INFO.whatsapp}?text=${message}`, "_blank");
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.name || !formData.phone || !formData.serviceType || !formData.acType || !formData.address || !formData.city) {
@@ -41,52 +40,41 @@ const Contact = () => {
       return;
     }
 
-    setIsSubmitting(true);
+    // Build WhatsApp message with form details
+    const message = `*New Service Booking Request*%0A%0A` +
+      `*Name:* ${formData.name}%0A` +
+      `*Phone:* ${formData.phone}%0A` +
+      `${formData.email ? `*Email:* ${formData.email}%0A` : ''}` +
+      `*Service:* ${formData.serviceType}%0A` +
+      `*AC Type:* ${formData.acType}%0A` +
+      `*Units:* ${formData.units}%0A` +
+      `${formData.preferredDate ? `*Preferred Date:* ${formData.preferredDate}%0A` : ''}` +
+      `${formData.preferredTimeSlot ? `*Time Slot:* ${formData.preferredTimeSlot}%0A` : ''}` +
+      `*Address:* ${formData.address}, ${formData.city}${formData.pincode ? ` - ${formData.pincode}` : ''}%0A` +
+      `*Contact Via:* ${formData.preferredContactMode}%0A` +
+      `${formData.notes ? `*Notes:* ${formData.notes}` : ''}`;
 
-    try {
-      const { error } = await supabase.from("service_bookings").insert([
-        {
-          name: formData.name.trim(),
-          phone: formData.phone.trim(),
-          email: formData.email.trim() || null,
-          service_type: formData.serviceType,
-          ac_type: formData.acType,
-          units: parseInt(formData.units),
-          preferred_date: formData.preferredDate || null,
-          preferred_time_slot: formData.preferredTimeSlot || null,
-          address: formData.address.trim(),
-          city: formData.city.trim(),
-          pincode: formData.pincode.trim() || null,
-          preferred_contact_mode: formData.preferredContactMode,
-          notes: formData.notes.trim() || null
-        }
-      ]);
-
-      if (error) throw error;
-
-      toast.success("Booking submitted successfully! We will contact you shortly.");
-      
-      setFormData({
-        name: "",
-        phone: "",
-        email: "",
-        serviceType: "",
-        acType: "",
-        units: "1",
-        preferredDate: "",
-        preferredTimeSlot: "",
-        address: "",
-        city: "",
-        pincode: "",
-        preferredContactMode: "Call",
-        notes: ""
-      });
-    } catch (error) {
-      console.error("Error submitting booking:", error);
-      toast.error("Failed to submit booking. Please try again or contact us directly.");
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Open WhatsApp with pre-filled message
+    window.open(`https://wa.me/${CONTACT_INFO.whatsapp}?text=${message}`, "_blank");
+    
+    toast.success("Opening WhatsApp... Please send the message to complete your booking request.");
+    
+    // Reset form
+    setFormData({
+      name: "",
+      phone: "",
+      email: "",
+      serviceType: "",
+      acType: "",
+      units: "1",
+      preferredDate: "",
+      preferredTimeSlot: "",
+      address: "",
+      city: "",
+      pincode: "",
+      preferredContactMode: "Call",
+      notes: ""
+    });
   };
 
   return (
@@ -156,25 +144,6 @@ const Contact = () => {
                   <div>
                     <p className="text-sm font-medium">Working Hours</p>
                     <p className="text-xs text-muted-foreground">{CONTACT_INFO.workingHours}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3 pt-2 border-t border-border">
-                  <Star className="w-4 h-4 text-amber-500 mt-0.5 flex-shrink-0 fill-amber-500" />
-                  <div>
-                    <p className="text-sm font-medium">Google Rating</p>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-semibold">{CONTACT_INFO.googleRating}/5</span>
-                      <span className="text-xs text-muted-foreground">({CONTACT_INFO.googleReviews} reviews)</span>
-                      <a 
-                        href={CONTACT_INFO.googleMapsUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="text-primary hover:underline inline-flex items-center gap-0.5 text-xs"
-                      >
-                        View <ExternalLink className="w-3 h-3" />
-                      </a>
-                    </div>
                   </div>
                 </div>
               </CardContent>
@@ -374,9 +343,12 @@ const Contact = () => {
                   />
                 </div>
 
-                <Button type="submit" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? "Submitting..." : "Submit Booking"}
+                <Button type="submit" className="w-full">
+                  Send via WhatsApp
                 </Button>
+                <p className="text-xs text-muted-foreground text-center">
+                  This will open WhatsApp with your booking details pre-filled
+                </p>
               </form>
             </CardContent>
           </Card>
