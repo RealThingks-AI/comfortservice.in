@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { Phone, MessageCircle, CheckCircle, Clock, Shield, Users } from "lucide-react";
+import { Phone, MessageCircle, CheckCircle, Clock, Shield, Users, Star, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TestimonialCard } from "@/components/TestimonialCard";
 import { CONTACT_INFO } from "@/config/contact";
 import { testimonials } from "@/data/staticData";
@@ -12,6 +13,7 @@ const Home = () => {
   const heroY = useTransform(scrollY, [0, 500], [0, 150]);
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
 
+  const featuredRef = useScrollAnimation();
   const servicesRef = useScrollAnimation();
   const whyUsRef = useScrollAnimation();
   const processRef = useScrollAnimation();
@@ -61,8 +63,120 @@ const Home = () => {
         </motion.div>
       </section>
 
-      {/* Services Overview */}
+      {/* Featured Services */}
       <section className="section-padding">
+        <div className="container-wide">
+          <div ref={featuredRef.ref} className={`scroll-animate ${featuredRef.isVisible ? 'visible' : ''}`}>
+            <h2 className="text-center mb-2">Most Popular Services</h2>
+            <p className="text-center text-muted-foreground text-sm mb-8 max-w-xl mx-auto">
+              Our most requested services with proven results and customer satisfaction
+            </p>
+          </div>
+          
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-4"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={{
+              visible: {
+                transition: { staggerChildren: 0.1 }
+              }
+            }}
+          >
+            {[
+              {
+                name: "Split AC Deep Cleaning",
+                price: "₹799",
+                customers: "2,500+",
+                rating: "4.9",
+                highlight: "Most Booked",
+                features: ["Complete coil cleaning", "Gas pressure check", "Filter sanitization", "Performance optimization"]
+              },
+              {
+                name: "AC Gas Refilling",
+                price: "₹1,499",
+                customers: "1,800+",
+                rating: "4.8",
+                highlight: "Quick Service",
+                features: ["R22/R32 gas", "Leak detection", "Pressure testing", "Cooling restored"]
+              },
+              {
+                name: "AC Installation",
+                price: "₹799",
+                customers: "3,200+",
+                rating: "4.9",
+                highlight: "Expert Setup",
+                features: ["Professional mounting", "Piping up to 3m", "Safe gas handling", "Testing included"]
+              }
+            ].map((service, index) => (
+              <motion.div
+                key={index}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                transition={{ duration: 0.4 }}
+              >
+                <Card className="h-full border-primary/20">
+                  <CardHeader className="pb-3">
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <CardTitle className="text-base leading-tight">{service.name}</CardTitle>
+                      <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full whitespace-nowrap">
+                        {service.highlight}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                      <div className="flex items-center gap-1">
+                        <Users className="w-3.5 h-3.5" />
+                        <span>{service.customers} served</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Star className="w-3.5 h-3.5 fill-primary text-primary" />
+                        <span>{service.rating}</span>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-2xl font-bold text-primary">{service.price}</span>
+                      <span className="text-xs text-muted-foreground">onwards</span>
+                    </div>
+                    <ul className="space-y-1.5">
+                      {service.features.map((feature, idx) => (
+                        <li key={idx} className="text-xs text-muted-foreground flex items-start gap-2">
+                          <CheckCircle className="w-3.5 h-3.5 text-primary mt-0.5 flex-shrink-0" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="flex gap-2 pt-2">
+                      <Button asChild size="sm" className="flex-1">
+                        <Link to="/contact">Book Now</Link>
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="gap-1.5"
+                        onClick={() => {
+                          const message = encodeURIComponent(`Hi! I'm interested in ${service.name}. Please provide more details.`);
+                          window.open(`https://wa.me/${CONTACT_INFO.whatsapp}?text=${message}`, "_blank");
+                        }}
+                      >
+                        <MessageCircle className="w-3.5 h-3.5" />
+                        Ask
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Services Overview */}
+      <section className="section-padding bg-accent">
         <div className="container-narrow">
           <div ref={servicesRef.ref} className={`scroll-animate ${servicesRef.isVisible ? 'visible' : ''}`}>
             <h2 className="text-center mb-2">Complete AC Solutions</h2>
@@ -97,7 +211,7 @@ const Home = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="section-padding bg-accent">
+      <section className="section-padding">
         <div className="container-wide">
           <div ref={whyUsRef.ref} className={`scroll-animate ${whyUsRef.isVisible ? 'visible' : ''}`}>
             <h2 className="text-center mb-8">Why Choose Us</h2>
@@ -138,7 +252,7 @@ const Home = () => {
       </section>
 
       {/* Process Steps */}
-      <section className="section-padding">
+      <section className="section-padding bg-accent">
         <div className="container-narrow">
           <div ref={processRef.ref} className={`scroll-animate ${processRef.isVisible ? 'visible' : ''}`}>
             <h2 className="text-center mb-8">How It Works</h2>
@@ -163,7 +277,7 @@ const Home = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="section-padding bg-accent">
+      <section className="section-padding">
         <div className="container-wide">
           <div ref={testimonialsRef.ref} className={`scroll-animate ${testimonialsRef.isVisible ? 'visible' : ''}`}>
             <h2 className="text-center mb-8">What Our Customers Say</h2>
