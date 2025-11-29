@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import { Phone, MessageCircle, CheckCircle, Clock, Shield, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ServiceCard } from "@/components/ServiceCard";
 import { TestimonialCard } from "@/components/TestimonialCard";
-import { CONTACT_INFO, SERVICES } from "@/config/contact";
+import { CONTACT_INFO } from "@/config/contact";
 import { testimonials } from "@/data/staticData";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -62,44 +61,37 @@ const Home = () => {
         </motion.div>
       </section>
 
-      {/* Key Services */}
+      {/* Services Overview */}
       <section className="section-padding">
-        <div className="container-wide">
+        <div className="container-narrow">
           <div ref={servicesRef.ref} className={`scroll-animate ${servicesRef.isVisible ? 'visible' : ''}`}>
-            <h2 className="text-center mb-8">Our Services</h2>
+            <h2 className="text-center mb-2">Complete AC Solutions</h2>
+            <p className="text-center text-muted-foreground text-sm mb-8 max-w-xl mx-auto">
+              From installation to repair, we handle all your air conditioning needs with professional expertise
+            </p>
           </div>
-          <motion.div 
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={{
-              visible: {
-                transition: { staggerChildren: 0.08 }
-              }
-            }}
-          >
-            {SERVICES.slice(0, 6).map((service) => (
-              <motion.div
-                key={service.id}
-                variants={{
-                  hidden: { opacity: 0, y: 30 },
-                  visible: { opacity: 1, y: 0 }
-                }}
-                transition={{ duration: 0.5 }}
-              >
-                <ServiceCard
-                  name={service.name}
-                  description={service.description}
-                  startingPrice={service.startingPrice}
-                />
-              </motion.div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            {[
+              { label: "AC Servicing", desc: "Regular maintenance & deep cleaning" },
+              { label: "Installation", desc: "Professional setup for all AC types" },
+              { label: "Repairs", desc: "Fast troubleshooting & gas refill" },
+              { label: "AMC Plans", desc: "Annual contracts with priority support" }
+            ].map((item, index) => (
+              <div key={index} className="text-center p-4 bg-accent rounded-lg">
+                <h3 className="text-sm font-semibold mb-1">{item.label}</h3>
+                <p className="text-xs text-muted-foreground">{item.desc}</p>
+              </div>
             ))}
-          </motion.div>
-          <div className="text-center mt-6">
-            <Button asChild variant="outline">
-              <Link to="/services">View All Services</Link>
+          </div>
+
+          <div className="text-center">
+            <Button asChild size="lg" className="gap-2">
+              <Link to="/services">View All Services & Pricing</Link>
             </Button>
+            <p className="text-xs text-muted-foreground mt-3">
+              Transparent pricing • Detailed breakdowns • No hidden charges
+            </p>
           </div>
         </div>
       </section>
