@@ -12,7 +12,6 @@ import { ScrollProgress } from "@/components/ScrollProgress";
 import { PageTransition } from "@/components/PageTransition";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
-import Pricing from "./pages/Pricing";
 import AMC from "./pages/AMC";
 import ServiceAreas from "./pages/ServiceAreas";
 import About from "./pages/About";
@@ -29,7 +28,6 @@ const AnimatedRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageTransition><Home /></PageTransition>} />
         <Route path="/services" element={<PageTransition><Services /></PageTransition>} />
-        <Route path="/pricing" element={<PageTransition><Pricing /></PageTransition>} />
         <Route path="/amc" element={<PageTransition><AMC /></PageTransition>} />
         <Route path="/service-areas" element={<PageTransition><ServiceAreas /></PageTransition>} />
         <Route path="/about" element={<PageTransition><About /></PageTransition>} />
