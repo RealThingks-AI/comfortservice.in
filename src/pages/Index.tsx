@@ -181,14 +181,14 @@ const Index = () => {
       <Services />
 
       {/* How It Works Section */}
-      <section className="py-16 md:py-24 bg-accent">
+      <section className="py-12 md:py-20 bg-accent">
         <div className="container mx-auto px-4">
-          <motion.div {...fadeInUp} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-foreground">How It Works</h2>
-            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">Simple 4-step process to get your AC serviced</p>
+          <motion.div {...fadeInUp} className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 text-foreground">How It Works</h2>
+            <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">Simple 4-step process to get your AC serviced</p>
           </motion.div>
           <motion.div className="max-w-5xl mx-auto">
-            <motion.div {...staggerFast} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            <motion.div {...staggerFast} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
               {[{
               num: "1",
               title: "Contact Us",
@@ -209,16 +209,16 @@ const Index = () => {
               scale: 1.05,
               y: -8
             }} className="text-center">
-                  <Card className="p-6 md:p-8 h-full flex flex-col items-center hover:shadow-lg transition-all">
-                    <motion.div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-primary text-primary-foreground flex items-center justify-center text-2xl md:text-3xl font-bold mb-5" whileHover={{
+                  <Card className="p-5 md:p-7 h-full flex flex-col items-center hover:shadow-lg transition-all">
+                    <motion.div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-primary text-primary-foreground flex items-center justify-center text-xl md:text-2xl font-bold mb-4" whileHover={{
                   rotate: 360
                 }} transition={{
                   duration: 0.6
                 }}>
                       {step.num}
                     </motion.div>
-                    <h4 className="text-lg md:text-xl font-bold mb-3 text-foreground">{step.title}</h4>
-                    <p className="text-sm md:text-base text-muted-foreground">{step.desc}</p>
+                    <h4 className="text-base md:text-lg font-bold mb-2 text-foreground">{step.title}</h4>
+                    <p className="text-xs md:text-sm text-muted-foreground">{step.desc}</p>
                   </Card>
                 </motion.div>)}
             </motion.div>
@@ -227,29 +227,29 @@ const Index = () => {
       </section>
 
       {/* AMC Plans Section */}
-      <section id="amc" className="py-16 md:py-24 bg-background">
+      <section id="amc" className="py-12 md:py-20 bg-background">
         <div className="container mx-auto px-4">
-          <motion.div {...fadeInUp} className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-foreground">AMC Plans</h2>
-            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">Long-term care for your air conditioning systems with priority service</p>
+          <motion.div {...fadeInUp} className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 text-foreground">AMC Plans</h2>
+            <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">Long-term care for your air conditioning systems with priority service</p>
           </motion.div>
 
-          <motion.div {...staggerContainer} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
+          <motion.div {...staggerContainer} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto">
             {amcPlans.map((plan, i) => <motion.div key={i} {...fadeInScale} whileHover={{
             scale: 1.05,
             y: -10
           }} transition={{
             duration: 0.3
           }}>
-                <Card className="p-6 md:p-8 h-full cursor-pointer transition-all hover:shadow-xl hover:border-primary/30 border-2" onClick={() => handleServiceClick(`${plan.name} AMC`)}>
-                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-4">
-                    <h3 className="text-xl md:text-2xl font-bold text-foreground">{plan.name}</h3>
-                    <p className="text-xl md:text-2xl font-bold text-primary">{plan.price}</p>
+                <Card className="p-5 md:p-7 h-full cursor-pointer transition-all hover:shadow-xl hover:border-primary/30 border-2" onClick={() => handleServiceClick(`${plan.name} AMC`)}>
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-3">
+                    <h3 className="text-lg md:text-xl font-bold text-foreground">{plan.name}</h3>
+                    <p className="text-lg md:text-xl font-bold text-primary">{plan.price}</p>
                   </div>
-                  <p className="text-sm md:text-base text-primary font-semibold mb-5">{plan.visits}</p>
-                  <ul className="space-y-3">
-                    {plan.includes.map((item, j) => <li key={j} className="flex items-start text-sm md:text-base text-muted-foreground">
-                        <CheckCircle className="w-5 h-5 text-primary mr-3 flex-shrink-0 mt-0.5" />
+                  <p className="text-xs md:text-sm text-primary font-semibold mb-4">{plan.visits}</p>
+                  <ul className="space-y-2">
+                    {plan.includes.map((item, j) => <li key={j} className="flex items-start text-xs md:text-sm text-muted-foreground">
+                        <CheckCircle className="w-4 h-4 text-primary mr-2 flex-shrink-0 mt-0.5" />
                         {item}
                       </li>)}
                   </ul>
@@ -260,14 +260,14 @@ const Index = () => {
       </section>
 
       {/* Gallery + Testimonials Section */}
-      <section id="gallery" className="py-16 md:py-24 bg-muted">
+      <section id="gallery" className="py-12 md:py-20 bg-muted">
         <div className="container mx-auto px-4">
-          <motion.div {...fadeInUp} className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-foreground">Our Work</h2>
-            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">See the quality of our AC services</p>
+          <motion.div {...fadeInUp} className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 text-foreground">Our Work</h2>
+            <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">See the quality of our AC services</p>
           </motion.div>
 
-          <motion.div {...staggerContainer} className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-16 md:mb-24 max-w-6xl mx-auto">
+          <motion.div {...staggerContainer} className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 mb-12 md:mb-16 max-w-6xl mx-auto">
             {gallery.map((img, i) => <motion.div key={i} {...fadeInScale} whileHover={{
             scale: 1.05
           }} transition={{
@@ -277,16 +277,16 @@ const Index = () => {
               </motion.div>)}
           </motion.div>
 
-          <motion.div {...fadeInUp} className="bg-background rounded-2xl p-8 md:p-12">
-            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-10 md:mb-12 text-foreground">What Our Customers Say</h3>
-            <motion.div {...staggerContainer} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-8 max-w-6xl mx-auto">
+          <motion.div {...fadeInUp} className="bg-background rounded-2xl p-6 md:p-10">
+            <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-center mb-8 md:mb-10 text-foreground">What Our Customers Say</h3>
+            <motion.div {...staggerContainer} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6 max-w-6xl mx-auto">
               {testimonials.map((testimonial, i) => <motion.div key={i} {...fadeInScale} whileHover={{
               scale: 1.03,
               y: -8
             }} transition={{
               duration: 0.3
             }}>
-                  <Card className="p-6 md:p-8 border-2 h-full hover:border-primary/30 hover:shadow-lg transition-all">
+                  <Card className="p-5 md:p-7 border-2 h-full hover:border-primary/30 hover:shadow-lg transition-all">
                     <div className="flex gap-1 mb-4">
                       {[...Array(testimonial.rating)].map((_, j) => <motion.div key={j} initial={{
                     scale: 0,
@@ -304,10 +304,10 @@ const Index = () => {
                           <Star className="w-5 h-5 text-primary fill-primary" />
                         </motion.div>)}
                     </div>
-                    <p className="text-sm md:text-base text-muted-foreground mb-5 italic leading-relaxed">"{testimonial.text}"</p>
+                    <p className="text-xs md:text-sm text-muted-foreground mb-4 italic leading-relaxed">"{testimonial.text}"</p>
                     <div>
-                      <p className="text-base md:text-lg font-bold text-foreground">{testimonial.name}</p>
-                      <p className="text-sm text-muted-foreground">{testimonial.area}</p>
+                      <p className="text-sm md:text-base font-bold text-foreground">{testimonial.name}</p>
+                      <p className="text-xs md:text-sm text-muted-foreground">{testimonial.area}</p>
                     </div>
                   </Card>
                 </motion.div>)}
@@ -319,8 +319,8 @@ const Index = () => {
             }} whileTap={{
               scale: 0.95
             }}>
-                <Button onClick={() => window.open('https://share.google/XSCTACp1FdcN3VrHi', '_blank')} size="lg" className="h-12 md:h-14 px-6 md:px-8 text-base md:text-lg">
-                  <Star className="w-5 h-5 mr-2 fill-current" />
+                <Button onClick={() => window.open('https://share.google/XSCTACp1FdcN3VrHi', '_blank')} size="lg" className="h-11 md:h-12 px-5 md:px-7 text-sm md:text-base">
+                  <Star className="w-4 h-4 mr-2 fill-current" />
                   Rate Us on Google
                 </Button>
               </motion.div>
@@ -391,17 +391,17 @@ const Index = () => {
       </section>
 
       {/* About Us Section */}
-      <section id="about" className="py-16 md:py-24 bg-background">
+      <section id="about" className="py-12 md:py-20 bg-background">
         <div className="container mx-auto px-4">
           <motion.div {...fadeInUp} className="max-w-6xl mx-auto">
             {/* Header */}
-            <div className="text-center mb-12 md:mb-16">
+            <div className="text-center mb-8 md:mb-12">
               <motion.h2 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-foreground"
+                className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 text-foreground"
               >
                 About <span className="text-primary">Comfort Technical Services</span>
               </motion.h2>
@@ -410,7 +410,7 @@ const Index = () => {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-base md:text-lg text-muted-foreground mb-4"
+                className="text-sm md:text-base text-muted-foreground mb-3"
               >
                 Your trusted partner for professional air conditioning services in Pune & PCMC
               </motion.p>
