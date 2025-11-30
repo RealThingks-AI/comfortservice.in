@@ -44,11 +44,11 @@ const WhyChooseUs = () => {
   };
 
   return (
-    <section className="py-12 md:py-20 bg-muted">
-      <div className="container mx-auto px-4">
+    <section className="py-5 md:py-20 bg-muted">
+      <div className="container mx-auto px-2 md:px-4">
         <motion.div 
           {...staggerContainer}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1.5 md:gap-4"
         >
           {features.map((feature, i) => {
             const IconComponent = feature.icon;
@@ -63,21 +63,21 @@ const WhyChooseUs = () => {
                 }}
                 transition={{ duration: 0.3 }}
               >
-                <Card className="text-center transition-all duration-300 flex flex-col items-center justify-center h-full p-6 md:p-7 hover:shadow-xl hover:bg-accent/50 border-2 hover:border-primary/20 min-h-[180px] md:min-h-[220px]">
+                <Card className="text-center transition-all duration-300 flex flex-col items-center justify-center h-full p-3 md:p-7 hover:shadow-xl hover:bg-accent/50 border-2 hover:border-primary/20 min-h-[100px] md:min-h-[220px]">
                   {/* Icon */}
-                  <div className="flex items-center justify-center mb-4">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
-                      <IconComponent className="w-7 h-7 md:w-9 md:h-9 text-primary" />
+                  <div className="flex items-center justify-center mb-2 md:mb-4">
+                    <div className="w-8 h-8 md:w-14 md:h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
+                      <IconComponent className="w-5 h-5 md:w-9 md:h-9 text-primary" />
                     </div>
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-base md:text-lg font-bold mb-2 md:mb-3 text-foreground leading-tight">
+                  <h3 className="text-xs md:text-lg font-bold mb-1 md:mb-3 text-foreground leading-tight">
                     {feature.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-[10px] md:text-sm text-muted-foreground leading-relaxed">
                     {feature.desc}
                   </p>
                 </Card>

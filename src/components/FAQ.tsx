@@ -58,29 +58,29 @@ const FAQ = () => {
   ];
 
   return (
-    <section id="faq" className="py-12 md:py-20 bg-background">
-      <div className="container mx-auto px-4">
-        <motion.div {...fadeInUp} className="text-center mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-3 md:mb-4 text-foreground">
+    <section id="faq" className="py-5 md:py-20 bg-background">
+      <div className="container mx-auto px-2 md:px-4">
+        <motion.div {...fadeInUp} className="text-center mb-4 md:mb-12">
+          <h2 className="text-lg md:text-4xl font-bold mb-1.5 md:mb-4 text-foreground">
             Frequently Asked Questions
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground">
+          <p className="text-xs md:text-xl text-muted-foreground">
             Everything you need to know about our AC services
           </p>
         </motion.div>
 
         <motion.div {...fadeInUp} className="max-w-3xl mx-auto">
-          <Accordion type="single" collapsible className="space-y-4">
+          <Accordion type="single" collapsible className="space-y-1.5 md:space-y-4">
             {faqs.map((faq, index) => (
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="bg-background border border-border rounded-lg px-4 md:px-6 data-[state=open]:bg-[#F8F9FA] transition-colors duration-300"
+                className="bg-background border border-border rounded-lg px-2 md:px-6 data-[state=open]:bg-[#F8F9FA] transition-colors duration-300"
               >
-                <AccordionTrigger className="text-left text-sm md:text-base font-semibold text-foreground hover:text-primary py-4">
+                <AccordionTrigger className="text-left text-xs md:text-base font-semibold text-foreground hover:text-primary py-2 md:py-4">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-sm md:text-base text-muted-foreground pb-4 border-t border-border/50 pt-3">
+                <AccordionContent className="text-[10px] md:text-base text-muted-foreground pb-2 md:pb-4 border-t border-border/50 pt-1.5 md:pt-3">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
