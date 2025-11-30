@@ -143,12 +143,12 @@ const MultiStepBookingForm = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3 md:space-y-6">
       {/* Modern Progress Indicator */}
-      <div className="flex items-center justify-between mb-2">
+      <div className="flex items-center justify-between mb-1 md:mb-2">
         {[1, 2, 3, 4, 5].map((step, idx) => (
           <div key={step} className="flex items-center flex-1 last:flex-none">
-            <div className="flex flex-col items-center gap-2 flex-1">
+            <div className="flex flex-col items-center gap-1 md:gap-2 flex-1">
               <motion.div
                 initial={false}
                 animate={{
@@ -156,16 +156,16 @@ const MultiStepBookingForm = () => {
                   backgroundColor: step <= currentStep ? "hsl(var(--primary))" : "hsl(var(--muted))"
                 }}
                 className={cn(
-                  "w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all",
+                  "w-5 h-5 md:w-8 md:h-8 rounded-full flex items-center justify-center text-[10px] md:text-xs font-bold transition-all",
                   step <= currentStep ? "text-primary-foreground shadow-md" : "text-muted-foreground"
                 )}
               >
-                {step < currentStep ? <Check className="w-4 h-4" /> : step}
+                {step < currentStep ? <Check className="w-2 h-2 md:w-4 md:h-4" /> : step}
               </motion.div>
             </div>
             {idx < 4 && (
               <div className={cn(
-                "h-0.5 flex-1 transition-all duration-300 mx-1",
+                "h-0.5 flex-1 transition-all duration-300 mx-0.5 md:mx-1",
                 step < currentStep ? "bg-primary" : "bg-muted"
               )} />
             )}
@@ -174,8 +174,8 @@ const MultiStepBookingForm = () => {
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleFormSubmit)} className="space-y-6">
-          <div className="min-h-[180px]">
+        <form onSubmit={form.handleSubmit(handleFormSubmit)} className="space-y-3 md:space-y-6">
+          <div className="min-h-[120px] md:min-h-[180px]">
             <AnimatePresence mode="wait" custom={1}>
               {/* Step 1: Name */}
               {currentStep === 1 && (
@@ -187,11 +187,11 @@ const MultiStepBookingForm = () => {
                   animate="center"
                   exit="exit"
                   transition={{ duration: 0.25, ease: "easeInOut" }}
-                  className="space-y-3"
+                  className="space-y-2 md:space-y-3"
                 >
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-1 h-6 bg-primary rounded-full" />
-                    <h4 className="text-lg font-semibold text-foreground">Your Name</h4>
+                  <div className="flex items-center gap-1 md:gap-2 mb-2 md:mb-4">
+                    <div className="w-0.5 md:w-1 h-4 md:h-6 bg-primary rounded-full" />
+                    <h4 className="text-xs md:text-lg font-semibold text-foreground">Your Name</h4>
                   </div>
                   <FormField
                     control={form.control}
@@ -204,7 +204,7 @@ const MultiStepBookingForm = () => {
                               placeholder="Enter your full name" 
                               {...field} 
                               className={cn(
-                                "text-sm h-11 pl-4 pr-10 rounded-lg border-2 transition-all",
+                                "text-xs md:text-sm h-8 md:h-11 pl-2 md:pl-4 pr-8 md:pr-10 rounded-lg border-2 transition-all",
                                 fieldState.error && "border-destructive",
                                 !fieldState.error && field.value && field.value.length >= 3 && "border-primary bg-primary/5"
                               )}
@@ -214,14 +214,14 @@ const MultiStepBookingForm = () => {
                               <motion.div
                                 initial={{ scale: 0 }}
                                 animate={{ scale: 1 }}
-                                className="absolute right-3 top-1/2 -translate-y-1/2"
+                                className="absolute right-2 md:right-3 top-1/2 -translate-y-1/2"
                               >
-                                <Check className="w-4 h-4 text-primary" />
+                                <Check className="w-3 h-3 md:w-4 md:h-4 text-primary" />
                               </motion.div>
                             )}
                           </div>
                         </FormControl>
-                        <FormMessage className="text-xs" />
+                        <FormMessage className="text-[10px] md:text-xs" />
                       </FormItem>
                     )}
                   />
@@ -238,11 +238,11 @@ const MultiStepBookingForm = () => {
                   animate="center"
                   exit="exit"
                   transition={{ duration: 0.25, ease: "easeInOut" }}
-                  className="space-y-3"
+                  className="space-y-2 md:space-y-3"
                 >
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-1 h-6 bg-primary rounded-full" />
-                    <h4 className="text-lg font-semibold text-foreground">Phone Number</h4>
+                  <div className="flex items-center gap-1 md:gap-2 mb-2 md:mb-4">
+                    <div className="w-0.5 md:w-1 h-4 md:h-6 bg-primary rounded-full" />
+                    <h4 className="text-xs md:text-lg font-semibold text-foreground">Phone Number</h4>
                   </div>
                   <FormField
                     control={form.control}
@@ -256,7 +256,7 @@ const MultiStepBookingForm = () => {
                               type="tel"
                               {...field} 
                               className={cn(
-                                "text-sm h-11 pl-4 pr-10 rounded-lg border-2 transition-all",
+                                "text-xs md:text-sm h-8 md:h-11 pl-2 md:pl-4 pr-8 md:pr-10 rounded-lg border-2 transition-all",
                                 fieldState.error && "border-destructive",
                                 !fieldState.error && field.value && /^(\+91)?[6-9]\d{9}$/.test(field.value) && "border-primary bg-primary/5"
                               )}
@@ -266,14 +266,14 @@ const MultiStepBookingForm = () => {
                               <motion.div
                                 initial={{ scale: 0 }}
                                 animate={{ scale: 1 }}
-                                className="absolute right-3 top-1/2 -translate-y-1/2"
+                                className="absolute right-2 md:right-3 top-1/2 -translate-y-1/2"
                               >
-                                <Check className="w-4 h-4 text-primary" />
+                                <Check className="w-3 h-3 md:w-4 md:h-4 text-primary" />
                               </motion.div>
                             )}
                           </div>
                         </FormControl>
-                        <FormMessage className="text-xs" />
+                        <FormMessage className="text-[10px] md:text-xs" />
                       </FormItem>
                     )}
                   />
@@ -290,11 +290,11 @@ const MultiStepBookingForm = () => {
                   animate="center"
                   exit="exit"
                   transition={{ duration: 0.25, ease: "easeInOut" }}
-                  className="space-y-3"
+                  className="space-y-2 md:space-y-3"
                 >
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-1 h-6 bg-primary rounded-full" />
-                    <h4 className="text-lg font-semibold text-foreground">Select Service</h4>
+                  <div className="flex items-center gap-1 md:gap-2 mb-2 md:mb-4">
+                    <div className="w-0.5 md:w-1 h-4 md:h-6 bg-primary rounded-full" />
+                    <h4 className="text-xs md:text-lg font-semibold text-foreground">Select Service</h4>
                   </div>
                   <FormField
                     control={form.control}
@@ -306,7 +306,7 @@ const MultiStepBookingForm = () => {
                             <Select onValueChange={field.onChange} value={field.value}>
                               <SelectTrigger 
                                 className={cn(
-                                  "text-sm h-11 rounded-lg border-2 transition-all",
+                                  "text-xs md:text-sm h-8 md:h-11 rounded-lg border-2 transition-all",
                                   fieldState.error && "border-destructive",
                                   !fieldState.error && field.value && "border-primary bg-primary/5"
                                 )}
@@ -315,8 +315,8 @@ const MultiStepBookingForm = () => {
                               </SelectTrigger>
                               <SelectContent className="pointer-events-auto">
                                 {serviceOptions.map((service, i) => (
-                                  <SelectItem key={i} value={service.name} className="text-sm">
-                                    <span className="flex items-center gap-2">
+                                  <SelectItem key={i} value={service.name} className="text-xs md:text-sm">
+                                    <span className="flex items-center gap-1 md:gap-2">
                                       <span>{service.icon}</span>
                                       <span>{service.name}</span>
                                     </span>
@@ -328,14 +328,14 @@ const MultiStepBookingForm = () => {
                               <motion.div
                                 initial={{ scale: 0 }}
                                 animate={{ scale: 1 }}
-                                className="absolute right-10 top-1/2 -translate-y-1/2 pointer-events-none"
+                                className="absolute right-8 md:right-10 top-1/2 -translate-y-1/2 pointer-events-none"
                               >
-                                <Check className="w-4 h-4 text-primary" />
+                                <Check className="w-3 h-3 md:w-4 md:h-4 text-primary" />
                               </motion.div>
                             )}
                           </div>
                         </FormControl>
-                        <FormMessage className="text-xs" />
+                        <FormMessage className="text-[10px] md:text-xs" />
                       </FormItem>
                     )}
                   />
@@ -352,11 +352,11 @@ const MultiStepBookingForm = () => {
                   animate="center"
                   exit="exit"
                   transition={{ duration: 0.25, ease: "easeInOut" }}
-                  className="space-y-3"
+                  className="space-y-2 md:space-y-3"
                 >
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-1 h-6 bg-primary rounded-full" />
-                    <h4 className="text-lg font-semibold text-foreground">Preferred Date <span className="text-xs text-muted-foreground font-normal">(Optional)</span></h4>
+                  <div className="flex items-center gap-1 md:gap-2 mb-2 md:mb-4">
+                    <div className="w-0.5 md:w-1 h-4 md:h-6 bg-primary rounded-full" />
+                    <h4 className="text-xs md:text-lg font-semibold text-foreground">Preferred Date <span className="text-[10px] md:text-xs text-muted-foreground font-normal">(Optional)</span></h4>
                   </div>
                   <FormField
                     control={form.control}
@@ -369,16 +369,16 @@ const MultiStepBookingForm = () => {
                               <Button
                                 variant="outline"
                                 className={cn(
-                                  "w-full justify-start text-left font-normal h-11 rounded-lg border-2 transition-all text-sm",
+                                  "w-full justify-start text-left font-normal h-8 md:h-11 rounded-lg border-2 transition-all text-xs md:text-sm",
                                   !field.value && "text-muted-foreground",
                                   fieldState.error && "border-destructive",
                                   !fieldState.error && field.value && "border-primary bg-primary/5"
                                 )}
                               >
-                                <CalendarIcon className="mr-2 h-4 w-4" />
+                                <CalendarIcon className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
                                 {field.value ? format(field.value, "dd-MMM-yyyy") : "Select date or skip"}
                                 {!fieldState.error && field.value && (
-                                  <Check className="ml-auto w-4 h-4 text-primary" />
+                                  <Check className="ml-auto w-3 h-3 md:w-4 md:h-4 text-primary" />
                                 )}
                               </Button>
                             </PopoverTrigger>
@@ -393,12 +393,12 @@ const MultiStepBookingForm = () => {
                                   return date < today;
                                 }}
                                 initialFocus
-                                className="p-3 pointer-events-auto"
+                                className="p-2 md:p-3 pointer-events-auto"
                               />
                             </PopoverContent>
                           </Popover>
                         </FormControl>
-                        <FormMessage className="text-xs" />
+                        <FormMessage className="text-[10px] md:text-xs" />
                       </FormItem>
                     )}
                   />
@@ -415,11 +415,11 @@ const MultiStepBookingForm = () => {
                   animate="center"
                   exit="exit"
                   transition={{ duration: 0.25, ease: "easeInOut" }}
-                  className="space-y-3"
+                  className="space-y-2 md:space-y-3"
                 >
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-1 h-6 bg-primary rounded-full" />
-                    <h4 className="text-lg font-semibold text-foreground">Additional Details <span className="text-xs text-muted-foreground font-normal">(Optional)</span></h4>
+                  <div className="flex items-center gap-1 md:gap-2 mb-2 md:mb-4">
+                    <div className="w-0.5 md:w-1 h-4 md:h-6 bg-primary rounded-full" />
+                    <h4 className="text-xs md:text-lg font-semibold text-foreground">Additional Details <span className="text-[10px] md:text-xs text-muted-foreground font-normal">(Optional)</span></h4>
                   </div>
                   <FormField
                     control={form.control}
@@ -432,21 +432,21 @@ const MultiStepBookingForm = () => {
                               placeholder="Any special requirements or notes..." 
                               {...field}
                               value={field.value || ""} 
-                              rows={4}
+                              rows={3}
                               className={cn(
-                                "text-sm rounded-lg border-2 transition-all resize-none",
+                                "text-xs md:text-sm rounded-lg border-2 transition-all resize-none",
                                 fieldState.error && "border-destructive"
                               )}
                               autoFocus
                             />
                             {field.value && field.value.length > 0 && (
-                              <div className="absolute right-3 bottom-3 text-xs text-muted-foreground">
+                              <div className="absolute right-2 md:right-3 bottom-2 md:bottom-3 text-[10px] md:text-xs text-muted-foreground">
                                 {field.value.length}/500
                               </div>
                             )}
                           </div>
                         </FormControl>
-                        <FormMessage className="text-xs" />
+                        <FormMessage className="text-[10px] md:text-xs" />
                       </FormItem>
                     )}
                   />
@@ -456,15 +456,15 @@ const MultiStepBookingForm = () => {
           </div>
 
           {/* Modern Navigation Buttons */}
-          <div className="flex gap-3 pt-2">
+          <div className="flex gap-2 md:gap-3 pt-1 md:pt-2">
             {currentStep > 1 && (
               <Button 
                 type="button"
                 variant="outline"
                 onClick={goToPrevStep}
-                className="px-6 h-11 rounded-lg border-2"
+                className="px-3 md:px-6 h-8 md:h-11 rounded-lg border-2 text-xs md:text-sm"
               >
-                <ArrowLeft className="w-4 h-4 mr-2" />
+                <ArrowLeft className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
                 Back
               </Button>
             )}
@@ -473,17 +473,17 @@ const MultiStepBookingForm = () => {
               <Button 
                 type="button"
                 onClick={goToNextStep}
-                className="flex-1 h-11 rounded-lg shadow-md hover:shadow-lg transition-all"
+                className="flex-1 h-8 md:h-11 rounded-lg shadow-md hover:shadow-lg transition-all text-xs md:text-sm"
               >
                 Continue
-                <ArrowRight className="w-4 h-4 ml-2" />
+                <ArrowRight className="w-3 h-3 md:w-4 md:h-4 ml-1 md:ml-2" />
               </Button>
             ) : (
               <Button 
                 type="submit"
                 disabled={isSubmitting || !form.watch("name") || !form.watch("phone") || !form.watch("service")}
                 className={cn(
-                  "flex-1 h-11 rounded-lg shadow-md hover:shadow-lg transition-all",
+                  "flex-1 h-8 md:h-11 rounded-lg shadow-md hover:shadow-lg transition-all text-xs md:text-sm",
                   isSubmitting && "opacity-70 cursor-wait",
                   (!form.watch("name") || !form.watch("phone") || !form.watch("service"))
                     ? "bg-muted text-muted-foreground hover:bg-muted cursor-not-allowed" 
@@ -492,12 +492,12 @@ const MultiStepBookingForm = () => {
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    <Loader2 className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4 animate-spin" />
                     Sending...
                   </>
                 ) : (
                   <>
-                    <MessageCircle className="mr-2 h-4 w-4" />
+                    <MessageCircle className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
                     Send via WhatsApp
                   </>
                 )}

@@ -181,14 +181,14 @@ const Index = () => {
       <Services />
 
       {/* How It Works Section */}
-      <section className="py-12 md:py-20 bg-accent">
-        <div className="container mx-auto px-4">
-          <motion.div {...fadeInUp} className="text-center mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 text-foreground">How It Works</h2>
-            <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">Simple 4-step process to get your AC serviced</p>
+      <section className="py-5 md:py-20 bg-accent">
+        <div className="container mx-auto px-2 md:px-4">
+          <motion.div {...fadeInUp} className="text-center mb-4 md:mb-12">
+            <h2 className="text-lg md:text-3xl lg:text-4xl font-bold mb-1.5 md:mb-4 text-foreground">How It Works</h2>
+            <p className="text-xs md:text-base text-muted-foreground max-w-2xl mx-auto">Simple 4-step process to get your AC serviced</p>
           </motion.div>
           <motion.div className="max-w-5xl mx-auto">
-            <motion.div {...staggerFast} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            <motion.div {...staggerFast} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1.5 md:gap-6">
               {[{
               num: "1",
               title: "Contact Us",
@@ -209,16 +209,16 @@ const Index = () => {
               scale: 1.05,
               y: -8
             }} className="text-center">
-                  <Card className="p-5 md:p-7 h-full flex flex-col items-center hover:shadow-lg transition-all">
-                    <motion.div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-primary text-primary-foreground flex items-center justify-center text-xl md:text-2xl font-bold mb-4" whileHover={{
+                  <Card className="p-2 md:p-7 h-full flex flex-col items-center hover:shadow-lg transition-all">
+                    <motion.div className="w-8 h-8 md:w-16 md:h-16 rounded-2xl bg-primary text-primary-foreground flex items-center justify-center text-sm md:text-2xl font-bold mb-2 md:mb-4" whileHover={{
                   rotate: 360
                 }} transition={{
                   duration: 0.6
                 }}>
                       {step.num}
                     </motion.div>
-                    <h4 className="text-base md:text-lg font-bold mb-2 text-foreground">{step.title}</h4>
-                    <p className="text-xs md:text-sm text-muted-foreground">{step.desc}</p>
+                    <h4 className="text-xs md:text-lg font-bold mb-1 md:mb-2 text-foreground">{step.title}</h4>
+                    <p className="text-[10px] md:text-sm text-muted-foreground">{step.desc}</p>
                   </Card>
                 </motion.div>)}
             </motion.div>
@@ -227,29 +227,29 @@ const Index = () => {
       </section>
 
       {/* AMC Plans Section */}
-      <section id="amc" className="py-12 md:py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <motion.div {...fadeInUp} className="text-center mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 text-foreground">AMC Plans</h2>
-            <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">Long-term care for your air conditioning systems with priority service</p>
+      <section id="amc" className="py-5 md:py-20 bg-background">
+        <div className="container mx-auto px-2 md:px-4">
+          <motion.div {...fadeInUp} className="text-center mb-4 md:mb-12">
+            <h2 className="text-lg md:text-3xl lg:text-4xl font-bold mb-1.5 md:mb-4 text-foreground">AMC Plans</h2>
+            <p className="text-xs md:text-base text-muted-foreground max-w-2xl mx-auto">Long-term care for your air conditioning systems with priority service</p>
           </motion.div>
 
-          <motion.div {...staggerContainer} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto">
+          <motion.div {...staggerContainer} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-1.5 md:gap-6 max-w-6xl mx-auto">
             {amcPlans.map((plan, i) => <motion.div key={i} {...fadeInScale} whileHover={{
             scale: 1.05,
             y: -10
           }} transition={{
             duration: 0.3
           }}>
-                <Card className="p-5 md:p-7 h-full cursor-pointer transition-all hover:shadow-xl hover:border-primary/30 border-2" onClick={() => handleServiceClick(`${plan.name} AMC`)}>
-                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-3">
-                    <h3 className="text-lg md:text-xl font-bold text-foreground">{plan.name}</h3>
-                    <p className="text-lg md:text-xl font-bold text-primary">{plan.price}</p>
+                <Card className="p-2 md:p-7 h-full cursor-pointer transition-all hover:shadow-xl hover:border-primary/30 border-2" onClick={() => handleServiceClick(`${plan.name} AMC`)}>
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-1 md:gap-2 mb-1.5 md:mb-3">
+                    <h3 className="text-sm md:text-xl font-bold text-foreground">{plan.name}</h3>
+                    <p className="text-sm md:text-xl font-bold text-primary">{plan.price}</p>
                   </div>
-                  <p className="text-xs md:text-sm text-primary font-semibold mb-4">{plan.visits}</p>
-                  <ul className="space-y-2">
-                    {plan.includes.map((item, j) => <li key={j} className="flex items-start text-xs md:text-sm text-muted-foreground">
-                        <CheckCircle className="w-4 h-4 text-primary mr-2 flex-shrink-0 mt-0.5" />
+                  <p className="text-[10px] md:text-sm text-primary font-semibold mb-2 md:mb-4">{plan.visits}</p>
+                  <ul className="space-y-1 md:space-y-2">
+                    {plan.includes.map((item, j) => <li key={j} className="flex items-start text-[10px] md:text-sm text-muted-foreground">
+                        <CheckCircle className="w-3 h-3 md:w-4 md:h-4 text-primary mr-1 md:mr-2 flex-shrink-0 mt-0.5" />
                         {item}
                       </li>)}
                   </ul>
@@ -260,14 +260,14 @@ const Index = () => {
       </section>
 
       {/* Gallery + Testimonials Section */}
-      <section id="gallery" className="py-12 md:py-20 bg-muted">
-        <div className="container mx-auto px-4">
-          <motion.div {...fadeInUp} className="text-center mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 text-foreground">Our Work</h2>
-            <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">See the quality of our AC services</p>
+      <section id="gallery" className="py-5 md:py-20 bg-muted">
+        <div className="container mx-auto px-2 md:px-4">
+          <motion.div {...fadeInUp} className="text-center mb-4 md:mb-12">
+            <h2 className="text-lg md:text-3xl lg:text-4xl font-bold mb-1.5 md:mb-4 text-foreground">Our Work</h2>
+            <p className="text-xs md:text-base text-muted-foreground max-w-2xl mx-auto">See the quality of our AC services</p>
           </motion.div>
 
-          <motion.div {...staggerContainer} className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 mb-12 md:mb-16 max-w-6xl mx-auto">
+          <motion.div {...staggerContainer} className="grid grid-cols-2 md:grid-cols-4 gap-1.5 md:gap-5 mb-5 md:mb-16 max-w-6xl mx-auto">
             {gallery.map((img, i) => <motion.div key={i} {...fadeInScale} whileHover={{
             scale: 1.05
           }} transition={{
@@ -277,17 +277,17 @@ const Index = () => {
               </motion.div>)}
           </motion.div>
 
-          <motion.div {...fadeInUp} className="bg-background rounded-2xl p-6 md:p-10">
-            <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-center mb-8 md:mb-10 text-foreground">What Our Customers Say</h3>
-            <motion.div {...staggerContainer} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6 max-w-6xl mx-auto">
+          <motion.div {...fadeInUp} className="bg-background rounded-2xl p-3 md:p-10">
+            <h3 className="text-base md:text-2xl lg:text-3xl font-bold text-center mb-3 md:mb-10 text-foreground">What Our Customers Say</h3>
+            <motion.div {...staggerContainer} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-1.5 md:gap-6 mb-3 md:mb-6 max-w-6xl mx-auto">
               {testimonials.map((testimonial, i) => <motion.div key={i} {...fadeInScale} whileHover={{
               scale: 1.03,
               y: -8
             }} transition={{
               duration: 0.3
             }}>
-                  <Card className="p-5 md:p-7 border-2 h-full hover:border-primary/30 hover:shadow-lg transition-all">
-                    <div className="flex gap-1 mb-4">
+                  <Card className="p-2 md:p-7 border-2 h-full hover:border-primary/30 hover:shadow-lg transition-all">
+                    <div className="flex gap-0.5 md:gap-1 mb-2 md:mb-4">
                       {[...Array(testimonial.rating)].map((_, j) => <motion.div key={j} initial={{
                     scale: 0,
                     opacity: 0
@@ -301,13 +301,13 @@ const Index = () => {
                   }} viewport={{
                     once: true
                   }}>
-                          <Star className="w-5 h-5 text-primary fill-primary" />
+                          <Star className="w-3 h-3 md:w-5 md:h-5 text-primary fill-primary" />
                         </motion.div>)}
                     </div>
-                    <p className="text-xs md:text-sm text-muted-foreground mb-4 italic leading-relaxed">"{testimonial.text}"</p>
+                    <p className="text-[10px] md:text-sm text-muted-foreground mb-2 md:mb-4 italic leading-relaxed">"{testimonial.text}"</p>
                     <div>
-                      <p className="text-sm md:text-base font-bold text-foreground">{testimonial.name}</p>
-                      <p className="text-xs md:text-sm text-muted-foreground">{testimonial.area}</p>
+                      <p className="text-xs md:text-base font-bold text-foreground">{testimonial.name}</p>
+                      <p className="text-[10px] md:text-sm text-muted-foreground">{testimonial.area}</p>
                     </div>
                   </Card>
                 </motion.div>)}
@@ -319,8 +319,8 @@ const Index = () => {
             }} whileTap={{
               scale: 0.95
             }}>
-                <Button onClick={() => window.open('https://share.google/XSCTACp1FdcN3VrHi', '_blank')} size="lg" className="h-11 md:h-12 px-5 md:px-7 text-sm md:text-base">
-                  <Star className="w-4 h-4 mr-2 fill-current" />
+                <Button onClick={() => window.open('https://share.google/XSCTACp1FdcN3VrHi', '_blank')} size="lg" className="h-8 md:h-12 px-3 md:px-7 text-xs md:text-base">
+                  <Star className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2 fill-current" />
                   Rate Us on Google
                 </Button>
               </motion.div>
@@ -330,27 +330,27 @@ const Index = () => {
       </section>
 
       {/* Service Area + Booking Section - Side by Side */}
-      <section className="py-12 md:py-16 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-6 max-w-7xl mx-auto">
+      <section className="py-5 md:py-16 bg-background">
+        <div className="container mx-auto px-2 md:px-4">
+          <div className="grid lg:grid-cols-2 gap-2 md:gap-6 max-w-7xl mx-auto">
             {/* Service Coverage Area */}
             <motion.div {...fadeInLeft}>
-              <Card className="p-6 h-full border-2">
-                <div className="mb-6">
-                  <h2 className="text-2xl md:text-3xl font-bold mb-2 text-foreground">
+              <Card className="p-3 md:p-6 h-full border-2">
+                <div className="mb-3 md:mb-6">
+                  <h2 className="text-base md:text-3xl font-bold mb-1 md:mb-2 text-foreground">
                     Service Coverage Area
                   </h2>
-                  <p className="text-sm md:text-base text-muted-foreground">
+                  <p className="text-xs md:text-base text-muted-foreground">
                     We serve all major areas in Pune & PCMC
                   </p>
                 </div>
                 
-                <Card className="p-4 bg-muted border-border mb-4">
-                  <h3 className="text-lg md:text-xl font-bold mb-3 text-foreground flex items-center gap-2">
-                    <MapPin className="w-5 h-5 text-primary" />
+                <Card className="p-2 md:p-4 bg-muted border-border mb-2 md:mb-4">
+                  <h3 className="text-sm md:text-xl font-bold mb-1.5 md:mb-3 text-foreground flex items-center gap-1 md:gap-2">
+                    <MapPin className="w-3 h-3 md:w-5 md:h-5 text-primary" />
                     Areas We Cover
                   </h3>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-2 gap-1 md:gap-2">
                     {["Aundh", "Wakad", "Hinjewadi", "Pimple Saudagar", "Pimpri", "Chinchwad", "Kharadi", "Viman Nagar", "Baner", "Pimple Nilakh", "Rahatani", "Thergaon", "Kasarwadi", "Akurdi", "Nigdi", "Bhosari"].map((area, i) => <motion.div key={i} initial={{
                     opacity: 0,
                     x: -20
@@ -374,12 +374,12 @@ const Index = () => {
 
             {/* Book Your Service */}
             <motion.div {...fadeInRight}>
-              <Card className="p-6 h-full border-2 bg-gradient-to-br from-primary/5 via-background to-primary/5">
-                <div className="mb-6">
-                  <h2 className="text-2xl md:text-3xl font-bold mb-2 text-foreground">
+              <Card className="p-3 md:p-6 h-full border-2 bg-gradient-to-br from-primary/5 via-background to-primary/5">
+                <div className="mb-3 md:mb-6">
+                  <h2 className="text-base md:text-3xl font-bold mb-1 md:mb-2 text-foreground">
                     Book Your Service
                   </h2>
-                  <p className="text-sm md:text-base text-muted-foreground">
+                  <p className="text-xs md:text-base text-muted-foreground">
                     Quick and easy booking - we'll contact you shortly
                   </p>
                 </div>
@@ -391,17 +391,17 @@ const Index = () => {
       </section>
 
       {/* About Us Section */}
-      <section id="about" className="py-12 md:py-20 bg-background">
-        <div className="container mx-auto px-4">
+      <section id="about" className="py-5 md:py-20 bg-background">
+        <div className="container mx-auto px-2 md:px-4">
           <motion.div {...fadeInUp} className="max-w-6xl mx-auto">
             {/* Header */}
-            <div className="text-center mb-8 md:mb-12">
+            <div className="text-center mb-4 md:mb-12">
               <motion.h2 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 text-foreground"
+                className="text-lg md:text-3xl lg:text-4xl font-bold mb-1.5 md:mb-4 text-foreground"
               >
                 About <span className="text-primary">Comfort Technical Services</span>
               </motion.h2>
@@ -410,7 +410,7 @@ const Index = () => {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-sm md:text-base text-muted-foreground mb-3"
+                className="text-xs md:text-base text-muted-foreground mb-1.5 md:mb-3"
               >
                 Your trusted partner for professional air conditioning services in Pune & PCMC
               </motion.p>
@@ -419,33 +419,33 @@ const Index = () => {
                 whileInView={{ width: 96 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="h-1.5 bg-primary mx-auto rounded-full"
+                className="h-0.5 md:h-1.5 bg-primary mx-auto rounded-full"
               />
               <motion.p
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-sm text-muted-foreground mt-4"
+                className="text-xs md:text-sm text-muted-foreground mt-2 md:mt-4"
               >
                 Proprietor: <span className="font-semibold text-foreground">Sagar Shinde</span>
               </motion.p>
             </div>
 
             {/* Our Story */}
-            <div className="grid md:grid-cols-2 gap-10 md:gap-16 mb-16 md:mb-20">
+            <div className="grid md:grid-cols-2 gap-4 md:gap-16 mb-6 md:mb-20">
               <motion.div 
                 {...fadeInLeft} 
-                className="space-y-6"
+                className="space-y-2 md:space-y-6"
               >
-                <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-6">Our Story</h3>
-                <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                <h3 className="text-base md:text-3xl font-bold text-foreground mb-2 md:mb-6">Our Story</h3>
+                <p className="text-xs md:text-lg text-muted-foreground leading-relaxed">
                   Comfort Technical Services has been providing professional AC services in the Pune region since 2018. Serving Pune with 7+ years of experience, delivering reliable installation, maintenance, and repair services with outstanding customer care.
                 </p>
-                <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                <p className="text-xs md:text-lg text-muted-foreground leading-relaxed">
                   We place a high priority on providing outstanding customer service through prompt and dependable repairs, open communication, and affordable prices.
                 </p>
-                <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                <p className="text-xs md:text-lg text-muted-foreground leading-relaxed">
                   We facilitate flawless living and operational excellence; we are more than just a repair service. We want to create long-lasting connections that endure by keeping the greatest standards of professionalism, ethics, and customer care.
                 </p>
               </motion.div>
@@ -454,7 +454,7 @@ const Index = () => {
                 <motion.img 
                   src={teamImage} 
                   alt="Comfort Technical Services team" 
-                  className="rounded-2xl shadow-2xl w-full object-cover h-[320px] md:h-[400px]" 
+                  className="rounded-2xl shadow-2xl w-full object-cover h-[180px] md:h-[400px]" 
                   whileHover={{ scale: 1.03 }}
                   transition={{ duration: 0.4 }}
                 />
@@ -462,9 +462,9 @@ const Index = () => {
             </div>
 
             {/* Journey Timeline */}
-            <motion.div {...fadeInUp} className="mb-16 md:mb-20">
-              <h3 className="text-2xl md:text-3xl font-bold text-center mb-12 text-foreground">Our Journey</h3>
-              <motion.div {...staggerContainer} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <motion.div {...fadeInUp} className="mb-6 md:mb-20">
+              <h3 className="text-base md:text-3xl font-bold text-center mb-5 md:mb-12 text-foreground">Our Journey</h3>
+              <motion.div {...staggerContainer} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6">
                 {[
                   { year: "2018", title: "Foundation", desc: "Started Comfort Technical Services in Pune with a vision to provide reliable AC services" },
                   { year: "2019", title: "First 500 Customers", desc: "Reached our first 500 satisfied customers and expanded service coverage across Pune" },
@@ -479,14 +479,14 @@ const Index = () => {
                     whileHover={{ y: -8 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <Card className="p-6 h-full border-2 hover:border-primary/40 hover:shadow-lg transition-all">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                          <span className="text-lg font-bold text-primary">{milestone.year}</span>
+                    <Card className="p-3 md:p-6 h-full border-2 hover:border-primary/40 hover:shadow-lg transition-all">
+                      <div className="flex items-center gap-1.5 md:gap-3 mb-2 md:mb-4">
+                        <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                          <span className="text-xs md:text-lg font-bold text-primary">{milestone.year}</span>
                         </div>
                       </div>
-                      <h4 className="text-lg font-bold mb-3 text-foreground">{milestone.title}</h4>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{milestone.desc}</p>
+                      <h4 className="text-sm md:text-lg font-bold mb-1.5 md:mb-3 text-foreground">{milestone.title}</h4>
+                      <p className="text-[10px] md:text-sm text-muted-foreground leading-relaxed">{milestone.desc}</p>
                     </Card>
                   </motion.div>
                 ))}
@@ -494,7 +494,7 @@ const Index = () => {
             </motion.div>
 
             {/* Stats */}
-            <motion.div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-16 md:mb-20" {...staggerContainer}>
+            <motion.div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-8 mb-6 md:mb-20" {...staggerContainer}>
               {[
                 { label: "Years Experience", value: 7, suffix: "+" },
                 { label: "AC Units Serviced", value: 10000, suffix: "+" },
@@ -507,9 +507,9 @@ const Index = () => {
                   whileHover={{ scale: 1.05, y: -8 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Card className="p-6 md:p-8 text-center border-2 border-primary/20 hover:border-primary/40 hover:shadow-xl transition-all">
+                  <Card className="p-3 md:p-8 text-center border-2 border-primary/20 hover:border-primary/40 hover:shadow-xl transition-all">
                     <motion.p 
-                      className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-3"
+                      className="text-lg md:text-4xl lg:text-5xl font-bold text-primary mb-1.5 md:mb-3"
                       initial={{ scale: 0.5, opacity: 0 }}
                       whileInView={{ scale: 1, opacity: 1 }}
                       viewport={{ once: true }}
@@ -522,7 +522,7 @@ const Index = () => {
                         className={stat.isDecimal ? "inline-block" : ""}
                       />
                     </motion.p>
-                    <p className="text-sm md:text-base text-muted-foreground font-semibold">{stat.label}</p>
+                    <p className="text-[10px] md:text-base text-muted-foreground font-semibold">{stat.label}</p>
                   </Card>
                 </motion.div>
               ))}
@@ -530,21 +530,21 @@ const Index = () => {
 
             {/* Core Values */}
             <motion.div {...fadeInUp}>
-              <h3 className="text-2xl md:text-3xl font-bold text-center mb-12 text-foreground">Our Core Values</h3>
-              <motion.div {...staggerContainer} className="grid md:grid-cols-3 gap-6 md:gap-8">
+              <h3 className="text-base md:text-3xl font-bold text-center mb-5 md:mb-12 text-foreground">Our Core Values</h3>
+              <motion.div {...staggerContainer} className="grid md:grid-cols-3 gap-2 md:gap-8">
                 {[
                   { 
-                    icon: <Award className="w-8 h-8" />,
+                    icon: <Award className="w-5 h-5 md:w-8 md:h-8" />,
                     title: "Quality First",
                     desc: "We never compromise on the quality of our work. Every service is performed with precision and care."
                   },
                   { 
-                    icon: <Users className="w-8 h-8" />,
+                    icon: <Users className="w-5 h-5 md:w-8 md:h-8" />,
                     title: "Customer Focused",
                     desc: "Your satisfaction is our priority. We listen to your needs and provide tailored solutions."
                   },
                   { 
-                    icon: <Shield className="w-8 h-8" />,
+                    icon: <Shield className="w-5 h-5 md:w-8 md:h-8" />,
                     title: "Transparency",
                     desc: "Honest pricing, clear communication, and no hidden charges."
                   }
@@ -555,16 +555,16 @@ const Index = () => {
                     whileHover={{ y: -8, scale: 1.03 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <Card className="p-8 text-center h-full border-2 hover:border-primary/40 hover:shadow-xl transition-all">
+                    <Card className="p-3 md:p-8 text-center h-full border-2 hover:border-primary/40 hover:shadow-xl transition-all">
                       <motion.div 
-                        className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6 text-primary"
+                        className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-2 md:mb-6 text-primary"
                         whileHover={{ rotate: 360 }}
                         transition={{ duration: 0.6 }}
                       >
                         {value.icon}
                       </motion.div>
-                      <h4 className="text-xl font-bold mb-4 text-foreground">{value.title}</h4>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{value.desc}</p>
+                      <h4 className="text-sm md:text-xl font-bold mb-2 md:mb-4 text-foreground">{value.title}</h4>
+                      <p className="text-[10px] md:text-sm text-muted-foreground leading-relaxed">{value.desc}</p>
                     </Card>
                   </motion.div>
                 ))}
@@ -575,26 +575,26 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-foreground text-background py-12 md:py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 md:gap-12 mb-10">
+      <footer className="bg-foreground text-background py-5 md:py-20">
+        <div className="container mx-auto px-2 md:px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 md:gap-12 mb-4 md:mb-10">
             {/* Company Info */}
             <div className="lg:col-span-4">
-              <img src={logo} alt="CTS Logo" className="w-20 h-20 md:w-24 md:h-24 object-contain opacity-90 mb-5" />
-              <h3 className="text-xl md:text-2xl font-bold mb-4 opacity-95">Comfort Technical Services</h3>
-              <p className="text-sm md:text-base opacity-80 leading-relaxed mb-5">
+              <img src={logo} alt="CTS Logo" className="w-12 h-12 md:w-24 md:h-24 object-contain opacity-90 mb-2 md:mb-5" />
+              <h3 className="text-sm md:text-2xl font-bold mb-2 md:mb-4 opacity-95">Comfort Technical Services</h3>
+              <p className="text-xs md:text-base opacity-80 leading-relaxed mb-2 md:mb-5">
                 Professional AC servicing, repair, and maintenance since 2018. Serving Pune and PCMC with excellence for over 7 years.
               </p>
-              <div className="flex items-center gap-2 text-sm opacity-75">
-                <Shield className="w-5 h-5" />
+              <div className="flex items-center gap-1 md:gap-2 text-xs md:text-sm opacity-75">
+                <Shield className="w-3 h-3 md:w-5 md:h-5" />
                 <span>GSTIN: 27HEKPS5234F1Z4</span>
               </div>
             </div>
 
             {/* Quick Links */}
             <div className="lg:col-span-2">
-              <h4 className="text-lg md:text-xl font-bold mb-5 opacity-95">Quick Links</h4>
-              <ul className="space-y-3 text-sm md:text-base opacity-80">
+              <h4 className="text-sm md:text-xl font-bold mb-2 md:mb-5 opacity-95">Quick Links</h4>
+              <ul className="space-y-1.5 md:space-y-3 text-xs md:text-base opacity-80">
                 <li><a href="#home" className="hover:opacity-100 hover:text-primary transition-all">Home</a></li>
                 <li><a href="#services" className="hover:opacity-100 hover:text-primary transition-all">Services</a></li>
                 <li><a href="#amc" className="hover:opacity-100 hover:text-primary transition-all">AMC Plans</a></li>
@@ -606,10 +606,10 @@ const Index = () => {
 
             {/* Contact Info */}
             <div className="lg:col-span-3">
-              <h4 className="text-lg md:text-xl font-bold mb-5 opacity-95">Contact Us</h4>
-              <div className="space-y-4 text-sm md:text-base opacity-80">
-                <div className="flex items-start gap-2">
-                  <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5 text-primary" />
+              <h4 className="text-sm md:text-xl font-bold mb-2 md:mb-5 opacity-95">Contact Us</h4>
+              <div className="space-y-2 md:space-y-4 text-xs md:text-base opacity-80">
+                <div className="flex items-start gap-1 md:gap-2">
+                  <MapPin className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0 mt-0.5 text-primary" />
                   <p className="leading-relaxed">
                     NIKHIL NIWAS, SURVEY NO.179,<br />
                     SHOP NO-02, Pune, PCMC,<br />
@@ -617,9 +617,9 @@ const Index = () => {
                   </p>
                 </div>
                 
-                <div className="flex items-center gap-2">
-                  <Phone className="w-4 h-4 flex-shrink-0 text-primary" />
-                  <div className="space-y-1">
+                <div className="flex items-center gap-1 md:gap-2">
+                  <Phone className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0 text-primary" />
+                  <div className="space-y-0.5 md:space-y-1">
                     <a href="tel:+917745046520" className="block hover:opacity-100 hover:text-primary transition-all">
                       +91 77450 46520
                     </a>
@@ -629,15 +629,15 @@ const Index = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-center gap-2">
-                  <Mail className="w-4 h-4 flex-shrink-0 text-primary" />
+                <div className="flex items-center gap-1 md:gap-2">
+                  <Mail className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0 text-primary" />
                   <a href="mailto:comforttechnicalservice8@gmail.com" className="hover:opacity-100 hover:text-primary transition-all break-all">
                     comforttechnicalservice8@gmail.com
                   </a>
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 flex-shrink-0 text-primary" />
+                <div className="flex items-center gap-1 md:gap-2">
+                  <Clock className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0 text-primary" />
                   <div>
                     <p>Mon - Sat: 9:00 AM - 7:00 PM</p>
                     <p>Sunday: 10:00 AM - 5:00 PM</p>
@@ -648,32 +648,32 @@ const Index = () => {
 
             {/* Map */}
             <div className="lg:col-span-3">
-              <h4 className="text-lg md:text-xl font-bold mb-5 opacity-95">Find Us</h4>
-              <div className="rounded-xl overflow-hidden border-2 border-background/20 shadow-xl mb-4">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3781.2599!2d73.7997!3d18.6298!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDM3JzQ3LjMiTiA3M8KwNDcnNTguOSJF!5e0!3m2!1sen!2sin!4v1234567890" width="100%" height="220" style={{
+              <h4 className="text-sm md:text-xl font-bold mb-2 md:mb-5 opacity-95">Find Us</h4>
+              <div className="rounded-xl overflow-hidden border-2 border-background/20 shadow-xl mb-2 md:mb-4">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3781.2599!2d73.7997!3d18.6298!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDM3JzQ3LjMiTiA3M8KwNDcnNTguOSJF!5e0!3m2!1sen!2sin!4v1234567890" width="100%" height="150" style={{
                 border: 0
-              }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Comfort Technical Services Location" className="grayscale hover:grayscale-0 transition-all duration-300"></iframe>
+              }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Comfort Technical Services Location" className="grayscale hover:grayscale-0 transition-all duration-300 md:h-[220px]"></iframe>
               </div>
-              <Button variant="outline" size="default" onClick={() => window.open('https://maps.google.com/?q=NIKHIL+NIWAS+SURVEY+NO.179+SHOP+NO-02+Pune+PCMC+MH+411035', '_blank')} className="w-full text-sm border-background/30 hover:bg-background text-primary">
-                <MapPin className="w-4 h-4 mr-2" />
+              <Button variant="outline" size="default" onClick={() => window.open('https://maps.google.com/?q=NIKHIL+NIWAS+SURVEY+NO.179+SHOP+NO-02+Pune+PCMC+MH+411035', '_blank')} className="w-full text-xs md:text-sm border-background/30 hover:bg-background text-primary h-8 md:h-10">
+                <MapPin className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
                 Get Directions
               </Button>
             </div>
           </div>
 
           {/* Bottom Bar */}
-          <div className="border-t border-background/20 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-5">
-              <p className="text-sm opacity-75 text-center md:text-left">
+          <div className="border-t border-background/20 pt-3 md:pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-2 md:gap-5">
+              <p className="text-xs md:text-sm opacity-75 text-center md:text-left">
                 © 2025 Comfort Technical Services. All rights reserved.
               </p>
-              <div className="flex gap-4">
-                <Button variant="ghost" size="default" className="h-10 px-4 text-sm hover:bg-background/10" onClick={() => window.open(createWhatsAppLink('Hi! I found you online and would like to know more about your services.'), '_blank')}>
-                  <MessageCircle className="w-4 h-4 mr-2" />
+              <div className="flex gap-2 md:gap-4">
+                <Button variant="ghost" size="default" className="h-7 px-2 md:h-10 md:px-4 text-xs md:text-sm hover:bg-background/10" onClick={() => window.open(createWhatsAppLink('Hi! I found you online and would like to know more about your services.'), '_blank')}>
+                  <MessageCircle className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
                   WhatsApp
                 </Button>
-                <Button variant="ghost" size="default" className="h-10 px-4 text-sm hover:bg-background/10" onClick={() => window.open('tel:+917745046520', '_blank')}>
-                  <Phone className="w-4 h-4 mr-2" />
+                <Button variant="ghost" size="default" className="h-7 px-2 md:h-10 md:px-4 text-xs md:text-sm hover:bg-background/10" onClick={() => window.open('tel:+917745046520', '_blank')}>
+                  <Phone className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
                   Call Now
                 </Button>
               </div>
