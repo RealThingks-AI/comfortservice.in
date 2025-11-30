@@ -1,173 +1,226 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Phone, MessageCircle, Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Menu, X, Phone, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CONTACT_INFO } from "@/config/contact";
-import logo from "@/assets/logo.png";
 import { motion, AnimatePresence } from "framer-motion";
-export const Navbar = () => {
+import logo from "@/assets/logo.png";
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
-  const handleCall = () => {
-    window.location.href = `tel:${CONTACT_INFO.phone}`;
-  };
-  const handleWhatsApp = () => {
-    const message = encodeURIComponent("Hello! I would like to know more about your AC services.");
-    window.open(`https://wa.me/${CONTACT_INFO.whatsapp}?text=${message}`, "_blank");
-  };
-  const navLinks = [{
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Scroll spy functionality
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "-20% 0px -70% 0px",
+      // Trigger when section is in middle of viewport
+      threshold: 0
+    };
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.id;
+          if (sectionId) {
+            setActiveSection(sectionId);
+          }
+        }
+      });
+    };
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Observe all sections
+    const sections = document.querySelectorAll("section[id], #home");
+    sections.forEach(section => observer.observe(section));
+    return () => {
+      sections.forEach(section => observer.unobserve(section));
+    };
+  }, []);
+  const navItems = [{
     name: "Home",
-    path: "/"
+    href: "#home"
   }, {
     name: "Services",
-    path: "/services"
+    href: "#services"
   }, {
     name: "AMC Plans",
-    path: "/amc"
-  }, {
-    name: "Areas",
-    path: "/service-areas"
+    href: "#amc"
   }, {
     name: "About",
-    path: "/about"
-  }, {
-    name: "FAQs",
-    path: "/faqs"
+    href: "#about"
   }, {
     name: "Gallery",
-    path: "/gallery"
+    href: "#gallery"
   }, {
     name: "Contact",
-    path: "/contact"
+    href: "#contact"
   }];
-  const isActive = (path: string) => location.pathname === path;
-  return <nav className="sticky top-0 z-40 bg-background/95 backdrop-blur-sm border-b border-border">
-      <div className="container-wide">
-        <div className="flex justify-between items-center h-14">
-          <Link to="/" className="hover:opacity-80 transition-opacity flex-shrink-0 flex items-center gap-2">
-            <img src={logo} alt={CONTACT_INFO.companyName} className="h-8 sm:h-10 w-auto" />
-          </Link>
+  const scrollToSection = (href: string) => {
+    setIsOpen(false);
+    const element = document.querySelector(href);
+    if (element) {
+      const navbarHeight = 64; // navbar height in pixels
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - navbarHeight;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+  return <nav className={`fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border transition-shadow duration-300 ${isScrolled ? "shadow-[0_2px_8px_rgba(0,0,0,0.1)]" : ""}`}>
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <div className="flex items-center gap-2">
+            <img src={logo} alt="CTS Logo" className="w-10 h-10 object-contain" />
+            <div className="hidden sm:block">
+              <h1 className="text-lg font-bold text-foreground">Comfort Technical Services </h1>
+              
+            </div>
+          </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1">
-            {navLinks.map(link => <Link key={link.path} to={link.path} className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${isActive(link.path) ? "text-primary bg-primary/5" : "text-muted-foreground hover:text-foreground hover:bg-accent"}`}>
-                {link.name}
-              </Link>)}
+          <div className="hidden lg:flex items-center gap-6">
+            {navItems.map(item => {
+            const sectionId = item.href.replace("#", "");
+            const isActive = activeSection === sectionId;
+            return <button key={item.name} onClick={() => scrollToSection(item.href)} className={`text-sm font-medium transition-all duration-300 relative ${isActive ? "text-primary font-semibold" : "text-muted-foreground hover:text-primary"}`}>
+                  {item.name}
+                  {isActive && <motion.div layoutId="activeSection" className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full" transition={{
+                type: "spring",
+                stiffness: 380,
+                damping: 30
+              }} />}
+                </button>;
+          })}
           </div>
 
           {/* CTA Buttons */}
-          <div className="hidden md:flex items-center gap-2">
-            <Button onClick={handleCall} variant="ghost" size="sm" className="gap-1.5 h-8 text-sm">
-              <Phone className="w-4 h-4" />
-              <span className="hidden xl:inline">Call</span>
+          <div className="hidden lg:flex items-center gap-2">
+            <Button size="sm" variant="outline" onClick={() => window.open('tel:+917745046520')}>
+              <Phone className="w-4 h-4 mr-1" />
+              Call
             </Button>
-            <Button onClick={handleWhatsApp} size="sm" className="gap-1.5 h-8 bg-[#25D366] hover:bg-[#20BA5A] text-white">
-              <MessageCircle className="w-4 h-4" />
-              <span className="hidden xl:inline">WhatsApp</span>
+            <Button size="sm" onClick={() => window.open('https://wa.me/917745046520?text=Hi! I\'d like to know more about your AC services.', '_blank')}>
+              <MessageCircle className="w-4 h-4 mr-1" />
+              WhatsApp
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button 
-            onClick={() => setIsOpen(!isOpen)} 
-            className="lg:hidden p-2 rounded-md hover:bg-accent transition-colors relative w-10 h-10 flex items-center justify-center" 
-            aria-label="Toggle menu"
-          >
-            <motion.div
-              animate={isOpen ? "open" : "closed"}
-              className="relative w-5 h-5"
-            >
-              <motion.span
-                variants={{
-                  closed: { rotate: 0, y: 0 },
-                  open: { rotate: 45, y: 8 }
-                }}
-                transition={{ duration: 0.2 }}
-                className="absolute top-0 left-0 w-5 h-0.5 bg-foreground block"
-              />
-              <motion.span
-                variants={{
-                  closed: { opacity: 1 },
-                  open: { opacity: 0 }
-                }}
-                transition={{ duration: 0.2 }}
-                className="absolute top-2 left-0 w-5 h-0.5 bg-foreground block"
-              />
-              <motion.span
-                variants={{
-                  closed: { rotate: 0, y: 0 },
-                  open: { rotate: -45, y: -8 }
-                }}
-                transition={{ duration: 0.2 }}
-                className="absolute top-4 left-0 w-5 h-0.5 bg-foreground block"
-              />
-            </motion.div>
+          {/* Tablet CTA - Icons Only */}
+          <div className="hidden md:flex lg:hidden items-center gap-2">
+            <Button size="icon" variant="outline" onClick={() => window.open('tel:+917745046520')} aria-label="Call">
+              <Phone className="w-4 h-4" />
+            </Button>
+            <Button size="icon" onClick={() => window.open('https://wa.me/917745046520?text=Hi! I\'d like to know more about your AC services.', '_blank')} aria-label="WhatsApp">
+              <MessageCircle className="w-4 h-4" />
+            </Button>
+          </div>
+
+          {/* Mobile/Tablet Menu Button */}
+          <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden p-2 text-foreground hover:bg-muted rounded-md transition-colors" aria-label="Toggle menu">
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile/Tablet Menu */}
       <AnimatePresence>
-        {isOpen && (
-          <motion.div 
-            className="lg:hidden border-t border-border bg-background overflow-hidden"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            <motion.div 
-              className="container-wide py-3 space-y-1"
-              initial="closed"
-              animate="open"
-              exit="closed"
-              variants={{
-                open: {
-                  transition: { staggerChildren: 0.05, delayChildren: 0.1 }
-                },
-                closed: {
-                  transition: { staggerChildren: 0.03, staggerDirection: -1 }
-                }
-              }}
-            >
-              {navLinks.map(link => (
-                <motion.div
-                  key={link.path}
-                  variants={{
-                    open: { opacity: 1, x: 0 },
-                    closed: { opacity: 0, x: -20 }
-                  }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Link 
-                    to={link.path} 
-                    onClick={() => setIsOpen(false)} 
-                    className={`block px-3 py-2 text-sm font-medium rounded-md transition-colors ${isActive(link.path) ? "text-primary bg-primary/5" : "text-foreground hover:bg-accent"}`}
-                  >
-                    {link.name}
-                  </Link>
-                </motion.div>
-              ))}
-              <motion.div 
-                className="pt-3 flex gap-2 border-t border-border mt-3"
-                variants={{
-                  open: { opacity: 1, y: 0 },
-                  closed: { opacity: 0, y: -10 }
-                }}
-                transition={{ duration: 0.2, delay: 0.2 }}
-              >
-                <Button onClick={handleCall} variant="outline" size="sm" className="flex-1 gap-2">
-                  <Phone className="w-4 h-4" />
-                  Call Now
-                </Button>
-                <Button onClick={handleWhatsApp} size="sm" className="flex-1 gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white">
-                  <MessageCircle className="w-4 h-4" />
-                  WhatsApp
-                </Button>
-              </motion.div>
+        {isOpen && <>
+            {/* Dark Overlay */}
+            <motion.div initial={{
+          opacity: 0
+        }} animate={{
+          opacity: 1
+        }} exit={{
+          opacity: 0
+        }} transition={{
+          duration: 0.3
+        }} className="fixed inset-0 bg-black/50 lg:hidden" onClick={() => setIsOpen(false)} />
+            
+            {/* Menu Panel */}
+            <motion.div initial={{
+          opacity: 0,
+          y: -20
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} exit={{
+          opacity: 0,
+          y: -20
+        }} transition={{
+          duration: 0.3,
+          ease: "easeOut"
+        }} className="lg:hidden border-t border-border bg-background shadow-lg relative z-10">
+              <div className="container mx-auto px-4 py-4">
+                {/* Close Button */}
+                <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 p-2 text-muted-foreground hover:text-foreground transition-colors" aria-label="Close menu">
+                  <X className="w-5 h-5" />
+                </button>
+
+                {/* Menu Items */}
+                <div className="space-y-1 mb-4">
+                  {navItems.map(item => {
+                const sectionId = item.href.replace("#", "");
+                const isActive = activeSection === sectionId;
+                return <button key={item.name} onClick={e => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  scrollToSection(item.href);
+                }} className={`block w-full text-left px-4 py-3 text-base font-medium rounded-lg transition-colors touch-manipulation ${isActive ? "text-primary bg-primary/10 font-semibold" : "text-muted-foreground hover:text-primary hover:bg-muted/50"}`} style={{
+                  fontSize: '16px'
+                }}>
+                        {item.name}
+                      </button>;
+              })}
+                </div>
+
+                {/* Mobile CTA Buttons - Stacked Vertically */}
+                <div className="flex flex-col gap-2 pt-2 md:hidden">
+                  <Button size="lg" variant="outline" className="w-full justify-center" onClick={() => {
+                setIsOpen(false);
+                window.open('tel:+917745046520');
+              }}>
+                    <Phone className="w-5 h-5 mb-1" />
+                    <span className="ml-2">Call Now</span>
+                  </Button>
+                  <Button size="lg" className="w-full justify-center" onClick={() => {
+                setIsOpen(false);
+                window.open('https://wa.me/917745046520?text=Hi! I\'d like to know more about your AC services.', '_blank');
+              }}>
+                    <MessageCircle className="w-5 h-5 mb-1" />
+                    <span className="ml-2">WhatsApp Us</span>
+                  </Button>
+                </div>
+
+                {/* Tablet CTA Buttons - Horizontal */}
+                <div className="hidden md:flex lg:hidden gap-2 pt-2">
+                  <Button size="sm" variant="outline" className="flex-1" onClick={() => {
+                setIsOpen(false);
+                window.open('tel:+917745046520');
+              }}>
+                    <Phone className="w-4 h-4 mr-1" />
+                    Call
+                  </Button>
+                  <Button size="sm" className="flex-1" onClick={() => {
+                setIsOpen(false);
+                window.open('https://wa.me/917745046520?text=Hi! I\'d like to know more about your AC services.', '_blank');
+              }}>
+                    <MessageCircle className="w-4 h-4 mr-1" />
+                    WhatsApp
+                  </Button>
+                </div>
+              </div>
             </motion.div>
-          </motion.div>
-        )}
+          </>}
       </AnimatePresence>
     </nav>;
 };
+export default Navbar;
