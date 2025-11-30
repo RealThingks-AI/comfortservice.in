@@ -26,7 +26,7 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative overflow-hidden min-h-[500px] md:min-h-[650px] flex items-center bg-gradient-to-br from-background via-accent to-background">
+    <section id="home" className="relative overflow-hidden min-h-[450px] md:min-h-[600px] flex items-center bg-gradient-to-br from-background via-accent to-background">
       {/* Background with Parallax */}
       <motion.div 
         className="absolute inset-0 z-0"
@@ -41,7 +41,7 @@ const Hero = () => {
       </motion.div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 relative z-20 py-24 md:py-32">
+      <div className="container mx-auto px-4 relative z-20 py-16 md:py-28">
         <motion.div 
           className="max-w-4xl mx-auto text-center"
           initial={{ opacity: 0, y: 30 }}
@@ -50,7 +50,7 @@ const Hero = () => {
         >
           {/* Main Heading */}
           <motion.h1 
-            className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight text-foreground"
+            className="text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-5 leading-tight text-foreground"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -60,7 +60,7 @@ const Hero = () => {
 
           {/* Subheading */}
           <motion.p 
-            className="text-lg md:text-xl lg:text-2xl mb-4 text-foreground/90"
+            className="text-base md:text-xl lg:text-2xl mb-3 md:mb-4 text-foreground/90"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -70,7 +70,7 @@ const Hero = () => {
 
           {/* Description */}
           <motion.p 
-            className="text-base md:text-lg mb-8 md:mb-10 max-w-2xl mx-auto text-muted-foreground"
+            className="text-sm md:text-base mb-6 md:mb-8 max-w-2xl mx-auto text-muted-foreground"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -80,7 +80,7 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <motion.div 
-            className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 md:gap-4 mb-8"
+            className="flex flex-col sm:flex-row flex-wrap justify-center gap-2 md:gap-3 mb-6 md:mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
@@ -88,7 +88,7 @@ const Hero = () => {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
                 size="lg"
-                className="w-full sm:w-auto min-w-[180px] h-12 md:h-14 text-base md:text-lg font-semibold"
+                className="w-full sm:w-auto min-w-[160px] h-11 md:h-12 text-sm md:text-base font-semibold"
                 onClick={() => {
                   const message = "Hi Comfort Technical Services! I'd like to book a service.";
                   window.open(createWhatsAppLink(message), '_blank');
@@ -102,7 +102,7 @@ const Hero = () => {
               <Button
                 size="lg"
                 variant="secondary"
-                className="w-full sm:w-auto min-w-[180px] h-12 md:h-14 text-base md:text-lg font-semibold bg-success hover:bg-success/90 text-success-foreground"
+                className="w-full sm:w-auto min-w-[160px] h-11 md:h-12 text-sm md:text-base font-semibold bg-success hover:bg-success/90 text-success-foreground"
                 onClick={() => {
                   const message = "Hi! I'd like to know more about your AC services.";
                   window.open(createWhatsAppLink(message), '_blank');
@@ -117,7 +117,7 @@ const Hero = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="w-full sm:w-auto min-w-[180px] h-12 md:h-14 text-base md:text-lg font-semibold border-2"
+                className="w-full sm:w-auto min-w-[160px] h-11 md:h-12 text-sm md:text-base font-semibold border-2"
                 onClick={() => window.open('tel:+917745046520')}
               >
                 <Phone className="w-5 h-5 mr-2" />

@@ -111,20 +111,20 @@ const Services = () => {
   };
 
   return (
-    <section id="services" className="py-16 md:py-24 bg-background">
+    <section id="services" className="py-12 md:py-20 bg-background">
       <div className="container mx-auto px-4">
         {/* Section Heading */}
         <motion.div 
-          className="text-center mb-12 md:mb-16"
+          className="text-center mb-8 md:mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-foreground">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 text-foreground">
             Our Services
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
             Comprehensive AC solutions for homes and businesses
           </p>
         </motion.div>
@@ -132,7 +132,7 @@ const Services = () => {
         {/* Services Grid */}
         <motion.div 
           {...staggerContainer}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 lg:gap-6 max-w-[1200px] mx-auto"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 lg:gap-5 max-w-[1200px] mx-auto"
         >
           {services.map((service, i) => {
             const IconComponent = service.icon;
@@ -148,31 +148,31 @@ const Services = () => {
                 className="group"
               >
                 <Card 
-                  className="p-6 md:p-8 cursor-pointer transition-all duration-300 h-full flex flex-col hover:shadow-lg hover:scale-105 hover:bg-accent/50 border-2 hover:border-primary/20"
+                  className="p-5 md:p-7 cursor-pointer transition-all duration-300 h-full flex flex-col hover:shadow-lg hover:scale-105 hover:bg-accent/50 border-2 hover:border-primary/20"
                   onClick={() => handleServiceClick(service.name)}
                 >
                   {/* Icon with colored background */}
-                  <div className="flex justify-center mb-5">
+                  <div className="flex justify-center mb-4">
                     <div 
-                      className="w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
+                      className="w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
                       style={{ backgroundColor: service.iconBg }}
                     >
                       <IconComponent 
-                        className="w-7 h-7 md:w-8 md:h-8" 
+                        className="w-6 h-6 md:w-7 md:h-7" 
                         style={{ color: service.iconColor }}
                       />
                     </div>
                   </div>
 
                   {/* Service Name */}
-                  <h3 className="text-xl md:text-2xl font-bold mb-3 text-center text-foreground">
+                  <h3 className="text-lg md:text-xl font-bold mb-3 text-center text-foreground">
                     {service.name}
                   </h3>
 
                   {/* Price */}
-                  <div className="text-center mb-5">
-                    <p className="text-sm text-muted-foreground mb-1">Starting from</p>
-                    <p className="text-xl md:text-2xl font-bold text-primary">
+                  <div className="text-center mb-4">
+                    <p className="text-xs md:text-sm text-muted-foreground mb-1">Starting from</p>
+                    <p className="text-lg md:text-xl font-bold text-primary">
                       {service.price}
                     </p>
                   </div>
