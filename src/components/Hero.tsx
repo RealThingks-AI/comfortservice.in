@@ -50,7 +50,7 @@ const Hero = () => {
         >
           {/* Main Heading */}
           <motion.h1 
-            className="text-lg md:text-4xl lg:text-5xl font-bold mb-2 md:mb-5 leading-tight text-foreground"
+            className="text-2xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-5 leading-tight text-foreground"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -80,15 +80,15 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <motion.div 
-            className="flex flex-col sm:flex-row flex-wrap justify-center gap-1.5 md:gap-3 mb-3 md:mb-8"
+            className="flex flex-row justify-center gap-1.5 md:gap-3 mb-3 md:mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
-                size="lg"
-                className="w-full sm:w-auto min-w-[120px] md:min-w-[160px] h-8 md:h-12 text-xs md:text-base font-semibold"
+                size="sm"
+                className="h-7 md:h-10 px-2 md:px-4 text-[10px] md:text-sm font-semibold whitespace-nowrap"
                 onClick={() => {
                   const message = "Hi Comfort Technical Services! I'd like to book a service.";
                   window.open(createWhatsAppLink(message), '_blank');
@@ -100,9 +100,9 @@ const Hero = () => {
 
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
-                size="lg"
+                size="sm"
                 variant="secondary"
-                className="w-full sm:w-auto min-w-[120px] md:min-w-[160px] h-8 md:h-12 text-xs md:text-base font-semibold bg-success hover:bg-success/90 text-success-foreground"
+                className="h-7 md:h-10 px-2 md:px-4 text-[10px] md:text-sm font-semibold bg-success hover:bg-success/90 text-success-foreground whitespace-nowrap"
                 onClick={() => {
                   const message = "Hi! I'd like to know more about your AC services.";
                   window.open(createWhatsAppLink(message), '_blank');
@@ -115,9 +115,9 @@ const Hero = () => {
 
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
-                size="lg"
+                size="sm"
                 variant="outline"
-                className="w-full sm:w-auto min-w-[120px] md:min-w-[160px] h-8 md:h-12 text-xs md:text-base font-semibold border-2"
+                className="h-7 md:h-10 px-2 md:px-4 text-[10px] md:text-sm font-semibold border-2 whitespace-nowrap"
                 onClick={() => window.open('tel:+917745046520')}
               >
                 <Phone className="w-3 h-3 md:w-5 md:h-5 mr-1 md:mr-2" />
