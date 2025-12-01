@@ -38,8 +38,24 @@ const Navbar = () => {
     // Observe all sections
     const sections = document.querySelectorAll("section[id], #home");
     sections.forEach(section => observer.observe(section));
+
+    // Handle bottom of page - activate Contact section
+    const handleScroll = () => {
+      const scrollHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.scrollY;
+      const clientHeight = window.innerHeight;
+      
+      // If user is near the bottom (within 100px), activate contact section
+      if (scrollHeight - scrollTop - clientHeight < 100) {
+        setActiveSection("contact");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
     return () => {
       sections.forEach(section => observer.unobserve(section));
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
   const navItems = [{
