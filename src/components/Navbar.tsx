@@ -103,11 +103,11 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-6 flex-1 justify-center max-w-2xl">
             {navItems.map(item => {
             const sectionId = item.href.replace("#", "");
             const isActive = activeSection === sectionId;
-            return <button key={item.name} onClick={() => scrollToSection(item.href)} className={`text-sm font-medium transition-all duration-300 relative group ${isActive ? "text-primary font-semibold" : "text-muted-foreground hover:text-primary hover:-translate-y-0.5"}`}>
+            return <button key={item.name} onClick={() => scrollToSection(item.href)} className={`text-sm font-medium transition-all duration-300 relative group z-10 ${isActive ? "text-primary font-semibold" : "text-muted-foreground hover:text-primary hover:-translate-y-0.5"}`}>
                   {item.name}
                   {isActive && <motion.div layoutId="activeSection" className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full" transition={{
                 type: "spring",
@@ -120,7 +120,7 @@ const Navbar = () => {
           </div>
 
           {/* CTA Buttons */}
-          <div className="hidden lg:flex items-center gap-2">
+          <div className="hidden lg:flex items-center gap-2 flex-shrink-0">
             <Button size="sm" variant="outline" onClick={() => window.open('tel:+917745046520')}>
               <Phone className="w-4 h-4 mr-1" />
               Call
