@@ -91,13 +91,14 @@ const Navbar = () => {
             {navItems.map(item => {
             const sectionId = item.href.replace("#", "");
             const isActive = activeSection === sectionId;
-            return <button key={item.name} onClick={() => scrollToSection(item.href)} className={`text-sm font-medium transition-all duration-300 relative ${isActive ? "text-primary font-semibold" : "text-muted-foreground hover:text-primary"}`}>
+            return <button key={item.name} onClick={() => scrollToSection(item.href)} className={`text-sm font-medium transition-all duration-300 relative group ${isActive ? "text-primary font-semibold" : "text-muted-foreground hover:text-primary hover:-translate-y-0.5"}`}>
                   {item.name}
                   {isActive && <motion.div layoutId="activeSection" className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full" transition={{
                 type: "spring",
                 stiffness: 380,
                 damping: 30
               }} />}
+                  {!isActive && <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />}
                 </button>;
           })}
           </div>
@@ -174,7 +175,7 @@ const Navbar = () => {
                   e.preventDefault();
                   e.stopPropagation();
                   scrollToSection(item.href);
-                }} className={`block w-full text-left px-4 py-3 text-base font-medium rounded-lg transition-colors touch-manipulation ${isActive ? "text-primary bg-primary/10 font-semibold" : "text-muted-foreground hover:text-primary hover:bg-muted/50"}`} style={{
+                }} className={`block w-full text-left px-4 py-3 text-base font-medium rounded-lg transition-all duration-300 touch-manipulation ${isActive ? "text-primary bg-primary/10 font-semibold" : "text-muted-foreground hover:text-primary hover:bg-muted/50 hover:translate-x-1"}`} style={{
                   fontSize: '16px'
                 }}>
                         {item.name}
