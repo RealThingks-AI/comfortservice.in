@@ -688,7 +688,11 @@ const Index = () => {
           </div>
 
           {/* Bottom Bar */}
-          
+          <div className="border-t border-background/20 pt-4 md:pt-6 text-center">
+            <p className="text-xs md:text-sm opacity-70">
+              © 2025 Comfort Technical Services. All rights reserved.
+            </p>
+          </div>
         </div>
       </footer>
     </div>;
