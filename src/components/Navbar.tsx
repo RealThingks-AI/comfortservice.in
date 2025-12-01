@@ -52,11 +52,11 @@ const Navbar = () => {
     name: "AMC Plans",
     href: "#amc"
   }, {
-    name: "About",
-    href: "#about"
-  }, {
     name: "Gallery",
     href: "#gallery"
+  }, {
+    name: "About",
+    href: "#about"
   }, {
     name: "Contact",
     href: "#contact"
