@@ -132,7 +132,7 @@ const Services = () => {
         {/* Services Grid */}
         <motion.div 
           {...staggerContainer}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1.5 md:gap-3 max-w-[1100px] mx-auto"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 md:gap-2 max-w-[1000px] mx-auto"
         >
           {services.map((service, i) => {
             const IconComponent = service.icon;
@@ -148,43 +148,43 @@ const Services = () => {
                 className="group"
               >
                 <Card 
-                  className="p-2 md:p-4 cursor-pointer transition-all duration-300 h-full flex flex-col hover:shadow-lg hover:scale-105 hover:bg-accent/50 border-2 hover:border-primary/20"
+                  className="p-1.5 md:p-3 cursor-pointer transition-all duration-300 h-full flex flex-col hover:shadow-lg hover:scale-105 hover:bg-accent/50 border hover:border-primary/20"
                   onClick={() => handleServiceClick(service.name)}
                 >
                   {/* Icon with colored background */}
-                  <div className="flex justify-center mb-1.5 md:mb-2">
+                  <div className="flex justify-center mb-1 md:mb-1.5">
                     <div 
-                      className="w-7 h-7 md:w-10 md:h-10 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
+                      className="w-6 h-6 md:w-8 md:h-8 rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
                       style={{ backgroundColor: service.iconBg }}
                     >
                       <IconComponent 
-                        className="w-3.5 h-3.5 md:w-5 md:h-5" 
+                        className="w-3 h-3 md:w-4 md:h-4" 
                         style={{ color: service.iconColor }}
                       />
                     </div>
                   </div>
 
                   {/* Service Name */}
-                  <h3 className="text-xs md:text-base font-bold mb-1 md:mb-1.5 text-center text-foreground">
+                  <h3 className="text-[11px] md:text-sm font-bold mb-0.5 md:mb-1 text-center text-foreground">
                     {service.name}
                   </h3>
 
                   {/* Price */}
-                  <div className="text-center mb-1.5 md:mb-2">
-                    <p className="text-[9px] md:text-xs text-muted-foreground mb-0.5">Starting from</p>
-                    <p className="text-xs md:text-base font-bold text-primary">
+                  <div className="text-center mb-1 md:mb-1.5">
+                    <p className="text-[8px] md:text-[10px] text-muted-foreground mb-0">Starting from</p>
+                    <p className="text-[11px] md:text-sm font-bold text-primary">
                       {service.price}
                     </p>
                   </div>
 
                   {/* Features List */}
-                  <ul className="space-y-0.5 md:space-y-1.5 mb-1.5 md:mb-3 flex-grow">
+                  <ul className="space-y-0 md:space-y-1 mb-1 md:mb-2 flex-grow">
                     {service.desc.map((point, j) => (
                       <li 
                         key={j} 
-                        className="flex items-start text-[9px] md:text-sm text-muted-foreground"
+                        className="flex items-start text-[8px] md:text-xs text-muted-foreground leading-tight"
                       >
-                        <CheckCircle className="w-2.5 h-2.5 md:w-4 md:h-4 mr-1 md:mr-1.5 flex-shrink-0 mt-0.5" style={{ color: service.iconColor }} />
+                        <CheckCircle className="w-2 h-2 md:w-3 md:h-3 mr-0.5 md:mr-1 flex-shrink-0 mt-0.5" style={{ color: service.iconColor }} />
                         {point}
                       </li>
                     ))}
@@ -192,7 +192,7 @@ const Services = () => {
 
                   {/* CTA Button */}
                   <button 
-                    className="text-[10px] md:text-sm font-semibold transition-all duration-300 mt-auto text-center w-full py-0.5 md:py-1 text-primary hover:text-primary/80 group-hover:underline"
+                    className="text-[9px] md:text-xs font-semibold transition-all duration-300 mt-auto text-center w-full py-0.5 text-primary hover:text-primary/80 group-hover:underline"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleServiceClick(service.name);
