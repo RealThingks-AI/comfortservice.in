@@ -396,48 +396,58 @@ const Index = () => {
           <motion.div {...fadeInUp} className="max-w-6xl mx-auto">
             {/* Header */}
             <div className="text-center mb-4 md:mb-12">
-              <motion.h2 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="text-lg md:text-3xl lg:text-4xl font-bold mb-1.5 md:mb-4 text-foreground"
-              >
+              <motion.h2 initial={{
+              opacity: 0,
+              y: 20
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} viewport={{
+              once: true
+            }} transition={{
+              duration: 0.6
+            }} className="text-lg md:text-3xl lg:text-4xl font-bold mb-1.5 md:mb-4 text-foreground">
                 About <span className="text-primary">Comfort Technical Services</span>
               </motion.h2>
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-xs md:text-base text-muted-foreground mb-1.5 md:mb-3"
-              >
+              <motion.p initial={{
+              opacity: 0
+            }} whileInView={{
+              opacity: 1
+            }} viewport={{
+              once: true
+            }} transition={{
+              duration: 0.6,
+              delay: 0.2
+            }} className="text-xs md:text-base text-muted-foreground mb-1.5 md:mb-3">
                 Your trusted partner for professional air conditioning services in Pune & PCMC
               </motion.p>
-              <motion.div 
-                initial={{ width: 0 }}
-                whileInView={{ width: 96 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="h-0.5 md:h-1.5 bg-primary mx-auto rounded-full"
-              />
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-xs md:text-sm text-muted-foreground mt-2 md:mt-4"
-              >
+              <motion.div initial={{
+              width: 0
+            }} whileInView={{
+              width: 96
+            }} viewport={{
+              once: true
+            }} transition={{
+              duration: 0.8,
+              delay: 0.3
+            }} className="h-0.5 md:h-1.5 bg-primary mx-auto rounded-full" />
+              <motion.p initial={{
+              opacity: 0
+            }} whileInView={{
+              opacity: 1
+            }} viewport={{
+              once: true
+            }} transition={{
+              duration: 0.6,
+              delay: 0.4
+            }} className="text-xs md:text-sm text-muted-foreground mt-2 md:mt-4">
                 Proprietor: <span className="font-semibold text-foreground">Sagar Shinde</span>
               </motion.p>
             </div>
 
             {/* Our Story */}
             <div className="grid md:grid-cols-2 gap-4 md:gap-16 mb-6 md:mb-20">
-              <motion.div 
-                {...fadeInLeft} 
-                className="space-y-2 md:space-y-6"
-              >
+              <motion.div {...fadeInLeft} className="space-y-2 md:space-y-6">
                 <h3 className="text-base md:text-3xl font-bold text-foreground mb-2 md:mb-6">Our Story</h3>
                 <p className="text-xs md:text-lg text-muted-foreground leading-relaxed">
                   Comfort Technical Services has been providing professional AC services in the Pune region since 2018. Serving Pune with 7+ years of experience, delivering reliable installation, maintenance, and repair services with outstanding customer care.
@@ -451,13 +461,11 @@ const Index = () => {
               </motion.div>
 
               <motion.div {...fadeInRight}>
-                <motion.img 
-                  src={teamImage} 
-                  alt="Comfort Technical Services team" 
-                  className="rounded-2xl shadow-2xl w-full object-cover h-[180px] md:h-[400px]" 
-                  whileHover={{ scale: 1.03 }}
-                  transition={{ duration: 0.4 }}
-                />
+                <motion.img src={teamImage} alt="Comfort Technical Services team" className="rounded-2xl shadow-2xl w-full object-cover h-[180px] md:h-[400px]" whileHover={{
+                scale: 1.03
+              }} transition={{
+                duration: 0.4
+              }} />
               </motion.div>
             </div>
 
@@ -465,20 +473,35 @@ const Index = () => {
             <motion.div {...fadeInUp} className="mb-6 md:mb-20">
               <h3 className="text-base md:text-3xl font-bold text-center mb-5 md:mb-12 text-foreground">Our Journey</h3>
               <motion.div {...staggerContainer} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6">
-                {[
-                  { year: "2018", title: "Foundation", desc: "Started Comfort Technical Services in Pune with a vision to provide reliable AC services" },
-                  { year: "2019", title: "First 500 Customers", desc: "Reached our first 500 satisfied customers and expanded service coverage across Pune" },
-                  { year: "2020", title: "GST Registration", desc: "Became a registered GST business, offering professional invoices to all customers" },
-                  { year: "2021", title: "PCMC Expansion", desc: "Extended services to PCMC area including Akurdi, Chinchwad, and surrounding regions" },
-                  { year: "2023", title: "10,000+ Services", desc: "Crossed the milestone of 10,000+ AC units serviced with 5-star customer ratings" },
-                  { year: "2024", title: "AMC Programs", desc: "Launched comprehensive Annual Maintenance Contract programs for homes and businesses" }
-                ].map((milestone, i) => (
-                  <motion.div
-                    key={i}
-                    {...fadeInScale}
-                    whileHover={{ y: -8 }}
-                    transition={{ duration: 0.3 }}
-                  >
+                {[{
+                year: "2018",
+                title: "Foundation",
+                desc: "Started Comfort Technical Services in Pune with a vision to provide reliable AC services"
+              }, {
+                year: "2019",
+                title: "First 500 Customers",
+                desc: "Reached our first 500 satisfied customers and expanded service coverage across Pune"
+              }, {
+                year: "2020",
+                title: "GST Registration",
+                desc: "Became a registered GST business, offering professional invoices to all customers"
+              }, {
+                year: "2021",
+                title: "PCMC Expansion",
+                desc: "Extended services to PCMC area including Akurdi, Chinchwad, and surrounding regions"
+              }, {
+                year: "2023",
+                title: "10,000+ Services",
+                desc: "Crossed the milestone of 10,000+ AC units serviced with 5-star customer ratings"
+              }, {
+                year: "2024",
+                title: "AMC Programs",
+                desc: "Launched comprehensive Annual Maintenance Contract programs for homes and businesses"
+              }].map((milestone, i) => <motion.div key={i} {...fadeInScale} whileHover={{
+                y: -8
+              }} transition={{
+                duration: 0.3
+              }}>
                     <Card className="p-3 md:p-6 h-full border-2 hover:border-primary/40 hover:shadow-lg transition-all">
                       <div className="flex items-center gap-1.5 md:gap-3 mb-2 md:mb-4">
                         <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center">
@@ -488,86 +511,89 @@ const Index = () => {
                       <h4 className="text-sm md:text-lg font-bold mb-1.5 md:mb-3 text-foreground">{milestone.title}</h4>
                       <p className="text-[10px] md:text-sm text-muted-foreground leading-relaxed">{milestone.desc}</p>
                     </Card>
-                  </motion.div>
-                ))}
+                  </motion.div>)}
               </motion.div>
             </motion.div>
 
             {/* Stats */}
             <motion.div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-8 mb-6 md:mb-20" {...staggerContainer}>
-              {[
-                { label: "Years Experience", value: 7, suffix: "+" },
-                { label: "AC Units Serviced", value: 10000, suffix: "+" },
-                { label: "Google Reviews", value: 57, suffix: "+" },
-                { label: "Google Rating", value: 5.0, suffix: "/5", isDecimal: true }
-              ].map((stat, i) => (
-                <motion.div 
-                  key={i} 
-                  {...fadeInScale} 
-                  whileHover={{ scale: 1.05, y: -8 }}
-                  transition={{ duration: 0.3 }}
-                >
+              {[{
+              label: "Years Experience",
+              value: 7,
+              suffix: "+"
+            }, {
+              label: "AC Units Serviced",
+              value: 10000,
+              suffix: "+"
+            }, {
+              label: "Google Reviews",
+              value: 57,
+              suffix: "+"
+            }, {
+              label: "Google Rating",
+              value: 5.0,
+              suffix: "/5",
+              isDecimal: true
+            }].map((stat, i) => <motion.div key={i} {...fadeInScale} whileHover={{
+              scale: 1.05,
+              y: -8
+            }} transition={{
+              duration: 0.3
+            }}>
                   <Card className="p-3 md:p-8 text-center border-2 border-primary/20 hover:border-primary/40 hover:shadow-xl transition-all">
-                    <motion.p 
-                      className="text-lg md:text-4xl lg:text-5xl font-bold text-primary mb-1.5 md:mb-3"
-                      initial={{ scale: 0.5, opacity: 0 }}
-                      whileInView={{ scale: 1, opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: i * 0.1 }}
-                    >
-                      <AnimatedCounter 
-                        value={stat.value} 
-                        suffix={stat.suffix} 
-                        duration={2000}
-                        className={stat.isDecimal ? "inline-block" : ""}
-                      />
+                    <motion.p className="text-lg md:text-4xl lg:text-5xl font-bold text-primary mb-1.5 md:mb-3" initial={{
+                  scale: 0.5,
+                  opacity: 0
+                }} whileInView={{
+                  scale: 1,
+                  opacity: 1
+                }} viewport={{
+                  once: true
+                }} transition={{
+                  duration: 0.5,
+                  delay: i * 0.1
+                }}>
+                      <AnimatedCounter value={stat.value} suffix={stat.suffix} duration={2000} className={stat.isDecimal ? "inline-block" : ""} />
                     </motion.p>
                     <p className="text-[10px] md:text-base text-muted-foreground font-semibold">{stat.label}</p>
                   </Card>
-                </motion.div>
-              ))}
+                </motion.div>)}
             </motion.div>
 
             {/* Core Values */}
             <motion.div {...fadeInUp}>
               <h3 className="text-base md:text-3xl font-bold text-center mb-5 md:mb-12 text-foreground">Our Core Values</h3>
               <motion.div {...staggerContainer} className="grid md:grid-cols-3 gap-2 md:gap-8">
-                {[
-                  { 
-                    icon: <Award className="w-5 h-5 md:w-8 md:h-8" />,
-                    title: "Quality First",
-                    desc: "We never compromise on the quality of our work. Every service is performed with precision and care."
-                  },
-                  { 
-                    icon: <Users className="w-5 h-5 md:w-8 md:h-8" />,
-                    title: "Customer Focused",
-                    desc: "Your satisfaction is our priority. We listen to your needs and provide tailored solutions."
-                  },
-                  { 
-                    icon: <Shield className="w-5 h-5 md:w-8 md:h-8" />,
-                    title: "Transparency",
-                    desc: "Honest pricing, clear communication, and no hidden charges."
-                  }
-                ].map((value, i) => (
-                  <motion.div
-                    key={i}
-                    {...fadeInScale}
-                    whileHover={{ y: -8, scale: 1.03 }}
-                    transition={{ duration: 0.3 }}
-                  >
+                {[{
+                icon: <Award className="w-5 h-5 md:w-8 md:h-8" />,
+                title: "Quality First",
+                desc: "We never compromise on the quality of our work. Every service is performed with precision and care."
+              }, {
+                icon: <Users className="w-5 h-5 md:w-8 md:h-8" />,
+                title: "Customer Focused",
+                desc: "Your satisfaction is our priority. We listen to your needs and provide tailored solutions."
+              }, {
+                icon: <Shield className="w-5 h-5 md:w-8 md:h-8" />,
+                title: "Transparency",
+                desc: "Honest pricing, clear communication, and no hidden charges."
+              }].map((value, i) => <motion.div key={i} {...fadeInScale} whileHover={{
+                y: -8,
+                scale: 1.03
+              }} transition={{
+                duration: 0.3
+              }}>
                     <Card className="p-3 md:p-8 text-center h-full border-2 hover:border-primary/40 hover:shadow-xl transition-all">
-                      <motion.div 
-                        className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-2 md:mb-6 text-primary"
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.6 }}
-                      >
+                      <motion.div className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-2 md:mb-6 text-primary" whileHover={{
+                    rotate: 360
+                  }} transition={{
+                    duration: 0.6
+                  }}>
                         {value.icon}
                       </motion.div>
                       <h4 className="text-sm md:text-xl font-bold mb-2 md:mb-4 text-foreground">{value.title}</h4>
                       <p className="text-[10px] md:text-sm text-muted-foreground leading-relaxed">{value.desc}</p>
                     </Card>
-                  </motion.div>
-                ))}
+                  </motion.div>)}
               </motion.div>
             </motion.div>
           </motion.div>
@@ -662,23 +688,7 @@ const Index = () => {
           </div>
 
           {/* Bottom Bar */}
-          <div className="border-t border-background/20 pt-3 md:pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-2 md:gap-5">
-              <p className="text-xs md:text-sm opacity-75 text-center md:text-left">
-                © 2025 Comfort Technical Services. All rights reserved.
-              </p>
-              <div className="flex gap-2 md:gap-4">
-                <Button variant="ghost" size="default" className="h-7 px-2 md:h-10 md:px-4 text-xs md:text-sm hover:bg-background/10" onClick={() => window.open(createWhatsAppLink('Hi! I found you online and would like to know more about your services.'), '_blank')}>
-                  <MessageCircle className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
-                  WhatsApp
-                </Button>
-                <Button variant="ghost" size="default" className="h-7 px-2 md:h-10 md:px-4 text-xs md:text-sm hover:bg-background/10" onClick={() => window.open('tel:+917745046520', '_blank')}>
-                  <Phone className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
-                  Call Now
-                </Button>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </footer>
     </div>;
