@@ -605,8 +605,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-foreground text-background py-5 md:py-20">
+      {/* Footer / Contact Section */}
+      <footer id="contact" className="bg-foreground text-background py-5 md:py-20">
         <div className="container mx-auto px-2 md:px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 md:gap-12 mb-4 md:mb-10">
             {/* Company Info */}
