@@ -17,10 +17,14 @@ const Navbar = () => {
 
   // Scroll spy functionality
   useEffect(() => {
+    // Reset to home on initial load if at top of page
+    if (window.scrollY < 100) {
+      setActiveSection("home");
+    }
+
     const observerOptions = {
       root: null,
       rootMargin: "-20% 0px -70% 0px",
-      // Trigger when section is in middle of viewport
       threshold: 0
     };
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
@@ -39,11 +43,17 @@ const Navbar = () => {
     const sections = document.querySelectorAll("section[id], #home");
     sections.forEach(section => observer.observe(section));
 
-    // Handle bottom of page - activate Contact section
+    // Handle scroll position for home and contact sections
     const handleScroll = () => {
       const scrollHeight = document.documentElement.scrollHeight;
       const scrollTop = window.scrollY;
       const clientHeight = window.innerHeight;
+      
+      // If at top of page, set to home
+      if (scrollTop < 100) {
+        setActiveSection("home");
+        return;
+      }
       
       // If user is near the bottom (within 100px), activate contact section
       if (scrollHeight - scrollTop - clientHeight < 100) {
