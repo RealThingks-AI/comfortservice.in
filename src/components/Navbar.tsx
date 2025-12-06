@@ -15,72 +15,72 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Scroll spy functionality
+  // Scroll spy functionality - calculate which section is most visible
   useEffect(() => {
     // Always start with home section active
     setActiveSection("home");
     
-    // Delay observer setup to prevent immediate override
-    const setupObserver = setTimeout(() => {
-      const observerOptions = {
-        root: null,
-        rootMargin: "-20% 0px -70% 0px",
-        threshold: 0
-      };
-      const observerCallback = (entries: IntersectionObserverEntry[]) => {
-        // Only update if user has scrolled
-        if (window.scrollY < 50) {
-          setActiveSection("home");
-          return;
-        }
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const sectionId = entry.target.id;
-            if (sectionId) {
-              setActiveSection(sectionId);
-            }
-          }
-        });
-      };
-      const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-      // Observe all sections
-      const sections = document.querySelectorAll("section[id], #home");
-      sections.forEach(section => observer.observe(section));
-
-      // Store observer for cleanup
-      (window as any).__navObserver = observer;
-      (window as any).__navSections = sections;
-    }, 100);
-
-    // Handle scroll position for home and contact sections
-    const handleScroll = () => {
-      const scrollHeight = document.documentElement.scrollHeight;
+    const navbarHeight = 64;
+    const sectionIds = ["home", "services", "amc", "gallery", "about", "contact"];
+    
+    const calculateActiveSection = () => {
       const scrollTop = window.scrollY;
+      const scrollHeight = document.documentElement.scrollHeight;
       const clientHeight = window.innerHeight;
       
       // If at top of page, set to home
-      if (scrollTop < 50) {
+      if (scrollTop < 100) {
         setActiveSection("home");
         return;
       }
       
-      // If user is near the bottom (within 100px), activate contact section
+      // If user is near the bottom, activate contact section
       if (scrollHeight - scrollTop - clientHeight < 100) {
         setActiveSection("contact");
+        return;
       }
+      
+      // Find the section that is currently most visible in viewport
+      let currentSection = "home";
+      let maxVisibility = 0;
+      
+      for (const sectionId of sectionIds) {
+        const element = document.getElementById(sectionId);
+        if (!element) continue;
+        
+        const rect = element.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        
+        // Calculate how much of the section is visible
+        const sectionTop = Math.max(rect.top - navbarHeight, 0);
+        const sectionBottom = Math.min(rect.bottom, viewportHeight);
+        const visibleHeight = Math.max(0, sectionBottom - sectionTop);
+        
+        // Prioritize sections that start near the top of viewport
+        const isNearTop = rect.top <= navbarHeight + 150 && rect.top >= -rect.height + 100;
+        
+        if (isNearTop && visibleHeight > 0) {
+          currentSection = sectionId;
+          break;
+        }
+        
+        if (visibleHeight > maxVisibility) {
+          maxVisibility = visibleHeight;
+          currentSection = sectionId;
+        }
+      }
+      
+      setActiveSection(currentSection);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    // Delay initial calculation
+    const initialTimeout = setTimeout(calculateActiveSection, 150);
+    
+    window.addEventListener("scroll", calculateActiveSection);
 
     return () => {
-      clearTimeout(setupObserver);
-      const observer = (window as any).__navObserver;
-      const sections = (window as any).__navSections;
-      if (observer && sections) {
-        sections.forEach((section: Element) => observer.unobserve(section));
-      }
-      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(initialTimeout);
+      window.removeEventListener("scroll", calculateActiveSection);
     };
   }, []);
   const navItems = [{
