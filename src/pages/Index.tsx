@@ -334,67 +334,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Service Area + Booking Section - Side by Side */}
-      <section className="py-5 md:py-16 bg-background">
-        <div className="container mx-auto px-2 md:px-4">
-          <div className="grid lg:grid-cols-2 gap-2 md:gap-6 max-w-7xl mx-auto">
-            {/* Service Coverage Area */}
-            <motion.div {...fadeInLeft}>
-              <Card className="p-3 md:p-6 h-full border-2">
-                <div className="mb-3 md:mb-6">
-                  <h2 className="text-base md:text-3xl font-bold mb-1 md:mb-2 text-foreground">
-                    Service Coverage Area
-                  </h2>
-                  <p className="text-xs md:text-base text-muted-foreground">
-                    We serve all major areas in Pune & PCMC
-                  </p>
-                </div>
-                
-                <Card className="p-2 md:p-4 bg-muted border-border mb-2 md:mb-4">
-                  <h3 className="text-sm md:text-xl font-bold mb-1.5 md:mb-3 text-foreground flex items-center gap-1 md:gap-2">
-                    <MapPin className="w-3 h-3 md:w-5 md:h-5 text-primary" />
-                    Areas We Cover
-                  </h3>
-                  <div className="grid grid-cols-2 gap-1 md:gap-2">
-                    {["Aundh", "Wakad", "Hinjewadi", "Pimple Saudagar", "Pimpri", "Chinchwad", "Kharadi", "Viman Nagar", "Baner", "Pimple Nilakh", "Rahatani", "Thergaon", "Kasarwadi", "Akurdi", "Nigdi", "Bhosari"].map((area, i) => <motion.div key={i} initial={{
-                    opacity: 0,
-                    x: -20
-                  }} whileInView={{
-                    opacity: 1,
-                    x: 0
-                  }} viewport={{
-                    once: true
-                  }} transition={{
-                    delay: i * 0.03
-                  }} className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                        <span className="text-sm font-medium text-primary">
-                          {area}
-                        </span>
-                      </motion.div>)}
-                  </div>
-                </Card>
-              </Card>
-            </motion.div>
-
-            {/* Book Your Service */}
-            <motion.div {...fadeInRight}>
-              <Card className="p-3 md:p-6 h-full border-2 bg-gradient-to-br from-primary/5 via-background to-primary/5">
-                <div className="mb-3 md:mb-6">
-                  <h2 className="text-base md:text-3xl font-bold mb-1 md:mb-2 text-foreground">
-                    Book Your Service
-                  </h2>
-                  <p className="text-xs md:text-base text-muted-foreground">
-                    Quick and easy booking - we'll contact you shortly
-                  </p>
-                </div>
-                <MultiStepBookingForm />
-              </Card>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
       {/* About Us Section */}
       <section id="about" className="py-5 md:py-20 bg-background">
         <div className="container mx-auto px-2 md:px-4">
@@ -602,6 +541,67 @@ const Index = () => {
               </motion.div>
             </motion.div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Service Area + Booking Section - Side by Side */}
+      <section className="py-5 md:py-16 bg-background">
+        <div className="container mx-auto px-2 md:px-4">
+          <div className="grid lg:grid-cols-2 gap-2 md:gap-6 max-w-7xl mx-auto">
+            {/* Service Coverage Area */}
+            <motion.div {...fadeInLeft}>
+              <Card className="p-3 md:p-6 h-full border-2">
+                <div className="mb-3 md:mb-6">
+                  <h2 className="text-base md:text-3xl font-bold mb-1 md:mb-2 text-foreground">
+                    Service Coverage Area
+                  </h2>
+                  <p className="text-xs md:text-base text-muted-foreground">
+                    We serve all major areas in Pune & PCMC
+                  </p>
+                </div>
+                
+                <Card className="p-2 md:p-4 bg-muted border-border mb-2 md:mb-4">
+                  <h3 className="text-sm md:text-xl font-bold mb-1.5 md:mb-3 text-foreground flex items-center gap-1 md:gap-2">
+                    <MapPin className="w-3 h-3 md:w-5 md:h-5 text-primary" />
+                    Areas We Cover
+                  </h3>
+                  <div className="grid grid-cols-2 gap-1 md:gap-2">
+                    {["Aundh", "Wakad", "Hinjewadi", "Pimple Saudagar", "Pimpri", "Chinchwad", "Kharadi", "Viman Nagar", "Baner", "Pimple Nilakh", "Rahatani", "Thergaon", "Kasarwadi", "Akurdi", "Nigdi", "Bhosari"].map((area, i) => <motion.div key={i} initial={{
+                    opacity: 0,
+                    x: -20
+                  }} whileInView={{
+                    opacity: 1,
+                    x: 0
+                  }} viewport={{
+                    once: true
+                  }} transition={{
+                    delay: i * 0.03
+                  }} className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
+                        <span className="text-sm font-medium text-primary">
+                          {area}
+                        </span>
+                      </motion.div>)}
+                  </div>
+                </Card>
+              </Card>
+            </motion.div>
+
+            {/* Book Your Service */}
+            <motion.div {...fadeInRight}>
+              <Card className="p-3 md:p-6 h-full border-2 bg-gradient-to-br from-primary/5 via-background to-primary/5">
+                <div className="mb-3 md:mb-6">
+                  <h2 className="text-base md:text-3xl font-bold mb-1 md:mb-2 text-foreground">
+                    Book Your Service
+                  </h2>
+                  <p className="text-xs md:text-base text-muted-foreground">
+                    Quick and easy booking - we'll contact you shortly
+                  </p>
+                </div>
+                <MultiStepBookingForm />
+              </Card>
+            </motion.div>
+          </div>
         </div>
       </section>
 
