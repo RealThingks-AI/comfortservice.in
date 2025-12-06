@@ -17,31 +17,41 @@ const Navbar = () => {
 
   // Scroll spy functionality
   useEffect(() => {
-    // Reset to home on initial load if at top of page
-    if (window.scrollY < 100) {
-      setActiveSection("home");
-    }
-
-    const observerOptions = {
-      root: null,
-      rootMargin: "-20% 0px -70% 0px",
-      threshold: 0
-    };
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const sectionId = entry.target.id;
-          if (sectionId) {
-            setActiveSection(sectionId);
-          }
+    // Always start with home section active
+    setActiveSection("home");
+    
+    // Delay observer setup to prevent immediate override
+    const setupObserver = setTimeout(() => {
+      const observerOptions = {
+        root: null,
+        rootMargin: "-20% 0px -70% 0px",
+        threshold: 0
+      };
+      const observerCallback = (entries: IntersectionObserverEntry[]) => {
+        // Only update if user has scrolled
+        if (window.scrollY < 50) {
+          setActiveSection("home");
+          return;
         }
-      });
-    };
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const sectionId = entry.target.id;
+            if (sectionId) {
+              setActiveSection(sectionId);
+            }
+          }
+        });
+      };
+      const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    // Observe all sections
-    const sections = document.querySelectorAll("section[id], #home");
-    sections.forEach(section => observer.observe(section));
+      // Observe all sections
+      const sections = document.querySelectorAll("section[id], #home");
+      sections.forEach(section => observer.observe(section));
+
+      // Store observer for cleanup
+      (window as any).__navObserver = observer;
+      (window as any).__navSections = sections;
+    }, 100);
 
     // Handle scroll position for home and contact sections
     const handleScroll = () => {
@@ -50,7 +60,7 @@ const Navbar = () => {
       const clientHeight = window.innerHeight;
       
       // If at top of page, set to home
-      if (scrollTop < 100) {
+      if (scrollTop < 50) {
         setActiveSection("home");
         return;
       }
@@ -64,7 +74,12 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
 
     return () => {
-      sections.forEach(section => observer.unobserve(section));
+      clearTimeout(setupObserver);
+      const observer = (window as any).__navObserver;
+      const sections = (window as any).__navSections;
+      if (observer && sections) {
+        sections.forEach((section: Element) => observer.unobserve(section));
+      }
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
