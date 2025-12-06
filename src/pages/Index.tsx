@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Phone, MessageCircle, CheckCircle, Award, Shield, Users, Clock, Mail, MapPin, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -17,6 +18,10 @@ import ServiceAreaMap from "@/components/ServiceAreaMap";
 import MultiStepBookingForm from "@/components/MultiStepBookingForm";
 import { AnimatedCounter } from "@/hooks/use-counter-animation";
 const Index = () => {
+  // Scroll to top on page load to ensure Home section is visible
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   // Enhanced animation variants
   const fadeInUp = {
     initial: {
