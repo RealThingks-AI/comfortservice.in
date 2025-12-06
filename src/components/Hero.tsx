@@ -142,9 +142,7 @@ const Hero = () => {
           delay: 0.6
         }}>
             <p>GSTIN: 27HEKPS5234F1Z4</p>
-            <button onClick={handleCopyGSTIN} className="p-1 md:p-1.5 hover:bg-accent rounded-md transition-colors" aria-label="Copy GSTIN">
-              {copiedGSTIN ? <Check className="w-3 h-3 md:w-4 md:h-4 text-success" /> : <Copy className="w-3 h-3 md:w-4 md:h-4" />}
-            </button>
+            
           </motion.div>
         </motion.div>
       </div>
