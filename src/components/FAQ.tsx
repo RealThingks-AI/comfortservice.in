@@ -6,84 +6,95 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+const faqs = [
+  {
+    question: "How much does AC servicing cost?",
+    answer: "Our AC servicing starts from just ₹399. This includes filter cleaning, coil inspection, refrigerant level check, and performance optimization. Deep cleaning services start from ₹599."
+  },
+  {
+    question: "Do you service all AC brands?",
+    answer: "Yes! We service all major AC brands including LG, Samsung, Daikin, Voltas, Blue Star, Hitachi, Carrier, Panasonic, Whirlpool, and many more. Our technicians are trained to work with all types of ACs."
+  },
+  {
+    question: "What areas do you cover?",
+    answer: "We cover all of Pune and PCMC including Aundh, Wakad, Hinjewadi, Pimple Saudagar, Pimpri, Chinchwad, Kharadi, Viman Nagar, Baner, Kothrud, and 15+ other localities."
+  },
+  {
+    question: "How quickly can you come?",
+    answer: "We offer same-day service for most requests made before 2 PM. Our average response time is 2-4 hours depending on your location. For scheduled appointments, we always arrive on time."
+  },
+  {
+    question: "Do you provide AMC plans?",
+    answer: "Yes! Our AMC plans start from ₹2,499/year for homes (4 visits), ₹4,999/year for offices (6 visits with gas top-up), and custom plans for commercial establishments with 24/7 support."
+  },
+  {
+    question: "What's included in deep cleaning?",
+    answer: "Our deep cleaning service includes complete disassembly, coil washing with high-pressure water jet, drain pipe cleaning, fan blade cleaning, anti-bacterial treatment, and reassembly with testing."
+  },
+  {
+    question: "Are your technicians certified?",
+    answer: "Yes, all our technicians are trained professionals with 3+ years of experience. They undergo regular training to stay updated with the latest AC technologies and repair techniques."
+  },
+  {
+    question: "What payment methods do you accept?",
+    answer: "We accept Cash, UPI (Google Pay, PhonePe, Paytm), Bank Transfer, and all major debit/credit cards. Payment is collected only after service completion and your satisfaction."
+  }
+];
+
 const FAQ = () => {
-  const fadeInUp = {
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-    transition: { duration: 0.6 }
-  };
-
-  const faqs = [
-    {
-      question: "How often should I service my AC?",
-      answer: "We recommend servicing your AC at least twice a year - once before summer and once after. Regular servicing ensures optimal performance, energy efficiency, and extends the lifespan of your unit. For commercial spaces or heavy usage, quarterly servicing is ideal."
-    },
-    {
-      question: "What is included in AC servicing?",
-      answer: "Our standard AC servicing includes: filter cleaning/replacement, coil cleaning, condensate drain cleaning, thermostat check, refrigerant level check, electrical connections inspection, and overall performance testing. Deep cleaning includes internal component sanitization."
-    },
-    {
-      question: "How much does AC servicing cost?",
-      answer: "Basic AC servicing starts from ₹399. Deep cleaning starts from ₹599. Gas refilling starts from ₹2,500. Final pricing depends on the AC type, brand, and specific issues found during inspection. We provide transparent quotes before starting any work."
-    },
-    {
-      question: "Do you provide warranty on your services?",
-      answer: "Yes, we provide service warranty on all our work. Parts come with manufacturer warranty, and our workmanship is guaranteed. Specific warranty terms depend on the service type - we'll provide complete details before starting work."
-    },
-    {
-      question: "How long does AC servicing take?",
-      answer: "Standard servicing typically takes 45-60 minutes per unit. Deep cleaning may take 1.5-2 hours. Gas refilling and repairs can take 2-3 hours depending on the issue. We ensure quality work without rushing."
-    },
-    {
-      question: "Do you service all AC brands?",
-      answer: "Yes, we service all major AC brands including Voltas, Blue Star, Daikin, LG, Samsung, Hitachi, Carrier, O General, Lloyd, and more. Our technicians are experienced with both split and window ACs of all brands."
-    },
-    {
-      question: "What areas do you cover in Pune?",
-      answer: "We cover entire Pune and PCMC areas including Aundh, Wakad, Hinjewadi, Pimple Saudagar, Pimpri, Chinchwad, Kharadi, Viman Nagar, and surrounding areas. Same-day or next-day service available for most locations."
-    },
-    {
-      question: "What are the benefits of AMC plans?",
-      answer: "AMC plans provide regular maintenance, priority service, cost savings, extended AC life, better cooling efficiency, and peace of mind. Plans include scheduled visits, gas top-ups, and emergency support. It's more economical than individual service calls."
-    },
-    {
-      question: "Can I get same-day service?",
-      answer: "Yes, we offer same-day service for most requests, subject to availability. For urgent repairs, we prioritize emergency calls. Call or WhatsApp us, and we'll confirm the earliest available slot for your location."
-    },
-    {
-      question: "How do I book a service?",
-      answer: "You can book by calling +91 77450 46520, messaging us on WhatsApp, or filling the booking form on our website. We'll confirm your appointment within minutes and send our technician at the scheduled time."
-    }
-  ];
-
   return (
-    <section id="faq" className="py-5 md:py-20 bg-background">
-      <div className="container mx-auto px-2 md:px-4">
-        <motion.div {...fadeInUp} className="text-center mb-4 md:mb-12">
-          <h2 className="text-lg md:text-4xl font-bold mb-1.5 md:mb-4 text-foreground">
+    <section id="faq" className="section-padding bg-secondary/30">
+      <div className="section-container">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <span className="inline-block px-4 py-2 mb-4 text-sm font-medium rounded-full bg-accent/10 text-accent">
+            FAQ
+          </span>
+          <h2 className="heading-lg text-foreground mb-4">
             Frequently Asked Questions
           </h2>
-          <p className="text-xs md:text-xl text-muted-foreground">
-            Everything you need to know about our AC services
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Find answers to common questions about our AC services
           </p>
         </motion.div>
 
-        <motion.div {...fadeInUp} className="max-w-3xl mx-auto">
-          <Accordion type="single" collapsible className="space-y-1.5 md:space-y-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto"
+        >
+          <Accordion type="single" collapsible className="space-y-3">
             {faqs.map((faq, index) => (
-              <AccordionItem
+              <motion.div
                 key={index}
-                value={`item-${index}`}
-                className="bg-background border border-border rounded-lg px-2 md:px-6 data-[state=open]:bg-[#F8F9FA] transition-colors duration-300"
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.08 }}
+                viewport={{ once: true }}
               >
-                <AccordionTrigger className="text-left text-xs md:text-base font-semibold text-foreground hover:text-primary py-2 md:py-4">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-[10px] md:text-base text-muted-foreground pb-2 md:pb-4 border-t border-border/50 pt-1.5 md:pt-3">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
+                <AccordionItem
+                  value={`item-${index}`}
+                  className="bg-background rounded-lg border border-border shadow-sm overflow-hidden"
+                >
+                  <AccordionTrigger className="px-5 py-3 text-left hover:no-underline hover:bg-primary/5 transition-colors duration-300 [&[data-state=open]]:bg-primary/5">
+                    <span className="text-sm md:text-base font-medium text-foreground pr-4">
+                      {faq.question}
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-5 pb-3 pt-0">
+                    <p className="text-muted-foreground leading-relaxed text-sm">
+                      {faq.answer}
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
+              </motion.div>
             ))}
           </Accordion>
         </motion.div>
