@@ -5,26 +5,26 @@ import { MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const serviceAreas = [
-  { name: "Aundh", popular: true },
-  { name: "Wakad", popular: true },
-  { name: "Hinjewadi", popular: true },
-  { name: "Pimple Saudagar", popular: true },
-  { name: "Baner", popular: true },
-  { name: "Kothrud", popular: false },
-  { name: "Pimpri", popular: true },
-  { name: "Chinchwad", popular: true },
-  { name: "Viman Nagar", popular: false },
-  { name: "Kharadi", popular: false },
-  { name: "Hadapsar", popular: false },
-  { name: "Magarpatta", popular: false },
-  { name: "Shivaji Nagar", popular: false },
-  { name: "Deccan", popular: false },
-  { name: "Nigdi", popular: false },
-  { name: "Akurdi", popular: false },
-  { name: "Bhosari", popular: false },
-  { name: "Moshi", popular: false },
-  { name: "Ravet", popular: false },
-  { name: "Tathawade", popular: false },
+  "Aundh",
+  "Wakad",
+  "Hinjewadi",
+  "Pimple Saudagar",
+  "Baner",
+  "Kothrud",
+  "Pimpri",
+  "Chinchwad",
+  "Viman Nagar",
+  "Kharadi",
+  "Hadapsar",
+  "Magarpatta",
+  "Shivaji Nagar",
+  "Deccan",
+  "Nigdi",
+  "Akurdi",
+  "Bhosari",
+  "Moshi",
+  "Ravet",
+  "Tathawade",
 ];
 
 const ServiceAreas = () => {
@@ -61,21 +61,14 @@ const ServiceAreas = () => {
         >
           {serviceAreas.map((area, index) => (
             <motion.div
-              key={area.name}
-              initial={{ opacity: 0, scale: 0.9 }}
+              key={area}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.3, delay: index * 0.03 }}
-              className={`
-                inline-flex items-center gap-1.5 px-3 py-2 md:px-4 md:py-2.5 rounded-full text-sm font-medium
-                transition-all duration-300 cursor-default
-                ${area.popular 
-                  ? "bg-accent text-accent-foreground shadow-sm" 
-                  : "bg-background border border-border text-foreground hover:border-accent/50"
-                }
-              `}
+              transition={{ duration: 0.3, delay: index * 0.02 }}
+              className="inline-flex items-center gap-1.5 px-3 py-2 md:px-4 md:py-2.5 rounded-full text-sm font-medium bg-background border border-border text-foreground hover:border-accent/50 transition-colors duration-200 cursor-default"
             >
-              <MapPin className="w-3.5 h-3.5" />
-              {area.name}
+              <MapPin className="w-3.5 h-3.5 text-accent" />
+              {area}
             </motion.div>
           ))}
         </motion.div>
