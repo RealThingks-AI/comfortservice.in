@@ -24,7 +24,7 @@ const Hero = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTagline((prev) => (prev + 1) % taglines.length);
-    }, 3000);
+    }, 5000); // Slowed down from 3000 to 5000
     return () => clearInterval(interval);
   }, []);
 
@@ -42,154 +42,46 @@ const Hero = () => {
     }
   };
 
-  // Floating elements data
-  const floatingElements = [
-    { size: 120, x: "8%", y: "18%", duration: 10, delay: 0, opacity: 0.15 },
-    { size: 80, x: "88%", y: "12%", duration: 12, delay: 1, opacity: 0.12 },
-    { size: 60, x: "78%", y: "68%", duration: 8, delay: 2, opacity: 0.1 },
-    { size: 140, x: "3%", y: "72%", duration: 14, delay: 0.5, opacity: 0.12 },
-    { size: 70, x: "92%", y: "48%", duration: 11, delay: 1.5, opacity: 0.08 },
-    { size: 50, x: "18%", y: "58%", duration: 7, delay: 2.5, opacity: 0.1 },
-    { size: 90, x: "65%", y: "82%", duration: 13, delay: 0.8, opacity: 0.1 },
-    { size: 55, x: "42%", y: "8%", duration: 9, delay: 1.2, opacity: 0.12 },
-  ];
-
   return (
     <section
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background Image with Parallax Effect */}
+      {/* Background Image */}
       <motion.div
-        initial={{ scale: 1.15, opacity: 0 }}
+        initial={{ scale: 1.05, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroBg})` }}
       />
 
-      {/* Gradient Overlay - Clean Navy Blue */}
+      {/* Gradient Overlay */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.2 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
         className="absolute inset-0 gradient-overlay" 
       />
 
-      {/* Animated Gradient Mesh */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-0 left-0 w-1/2 h-1/2 bg-gradient-radial from-sky-400/20 to-transparent" />
-        <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-gradient-radial from-cyan/15 to-transparent" />
+      {/* Subtle gradient accents */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
+        <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-gradient-radial from-sky-400/30 to-transparent" />
+        <div className="absolute bottom-1/4 right-0 w-1/4 h-1/4 bg-gradient-radial from-cyan/20 to-transparent" />
       </div>
 
-      {/* Subtle Pattern Overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }}
-      />
-
-      {/* Floating Elements - Enhanced */}
-      {floatingElements.map((el, index) => (
-        <motion.div
-          key={index}
-          className="absolute rounded-full pointer-events-none blur-xl"
-          style={{
-            width: el.size,
-            height: el.size,
-            left: el.x,
-            top: el.y,
-            background: index % 2 === 0 
-              ? `radial-gradient(circle, rgba(14, 165, 233, ${el.opacity}) 0%, transparent 70%)`
-              : `radial-gradient(circle, rgba(255, 255, 255, ${el.opacity * 0.6}) 0%, transparent 70%)`,
-          }}
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ 
-            opacity: [el.opacity, el.opacity * 1.5, el.opacity],
-            scale: [1, 1.3, 1],
-            y: [0, -40, 0],
-          }}
-          transition={{
-            duration: el.duration,
-            delay: el.delay,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-
-      {/* Floating geometric shapes - Enhanced */}
-      <motion.div
-        className="absolute w-40 h-40 border border-white/10 rounded-full pointer-events-none"
-        style={{ left: "12%", top: "28%" }}
-        animate={{ 
-          rotate: 360,
-          scale: [1, 1.15, 1],
-        }}
-        transition={{ 
-          rotate: { duration: 25, repeat: Infinity, ease: "linear" },
-          scale: { duration: 5, repeat: Infinity, ease: "easeInOut" },
-        }}
-      />
-      <motion.div
-        className="absolute w-24 h-24 border border-sky-400/15 pointer-events-none"
-        style={{ right: "18%", top: "22%", borderRadius: "35%" }}
-        animate={{ 
-          rotate: -360,
-          y: [0, 25, 0],
-        }}
-        transition={{ 
-          rotate: { duration: 18, repeat: Infinity, ease: "linear" },
-          y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
-        }}
-      />
-      <motion.div
-        className="absolute w-20 h-20 border border-white/8 pointer-events-none"
-        style={{ left: "72%", bottom: "32%", transform: "rotate(45deg)" }}
-        animate={{ 
-          rotate: [45, 135, 45],
-          opacity: [0.3, 0.6, 0.3],
-        }}
-        transition={{ 
-          duration: 10, 
-          repeat: Infinity, 
-          ease: "easeInOut",
-        }}
-      />
-      
-      {/* Additional decorative elements */}
-      <motion.div
-        className="absolute w-2 h-2 bg-sky-400/40 rounded-full pointer-events-none"
-        style={{ left: "25%", top: "40%" }}
-        animate={{ 
-          scale: [1, 2, 1],
-          opacity: [0.4, 0.8, 0.4],
-        }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute w-3 h-3 bg-white/30 rounded-full pointer-events-none"
-        style={{ right: "30%", top: "50%" }}
-        animate={{ 
-          scale: [1, 1.5, 1],
-          opacity: [0.3, 0.6, 0.3],
-        }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-      />
-
       {/* Content */}
-      <div className="relative z-10 section-container py-32">
+      <div className="relative z-10 section-container py-32 pb-48 md:pb-40">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badges */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
             className="flex flex-wrap items-center justify-center gap-3 mb-8"
           >
             <span className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full bg-white/10 backdrop-blur-sm text-white/90 border border-white/20">
-              <Snowflake className="w-4 h-4 text-sky-400 animate-pulse" />
+              <Snowflake className="w-4 h-4 text-sky-400" />
               All AC Solutions
             </span>
             <span className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full bg-emerald-500/20 backdrop-blur-sm text-emerald-300 border border-emerald-500/30">
@@ -202,18 +94,18 @@ const Hero = () => {
 
           {/* Animated Tagline */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             className="h-[5.5rem] md:h-[7rem] lg:h-[8rem] mt-6 mb-8 md:mt-8 md:mb-10 overflow-hidden"
           >
             <AnimatePresence mode="wait">
               <motion.h1
                 key={currentTagline}
-                initial={{ y: 60, opacity: 0 }}
+                initial={{ y: 40, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -60, opacity: 0 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
+                exit={{ y: -40, opacity: 0 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
                 className="heading-xl text-white drop-shadow-lg"
               >
                 {taglines[currentTagline]}{" "}
@@ -225,9 +117,9 @@ const Hero = () => {
           </motion.div>
 
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.25 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg md:text-xl lg:text-2xl text-white/85 mb-10 max-w-2xl mx-auto leading-relaxed font-light"
           >
             Professional AC servicing, repair & installation in Pune & PCMC.
@@ -236,37 +128,36 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.35 }}
-            className="flex flex-row items-center justify-center gap-2 sm:gap-4"
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-row items-center justify-center gap-3 sm:gap-4"
           >
             <Button
               variant="hero"
               size="xl"
               onClick={handleScrollToContact}
-              className="group min-w-[130px] sm:min-w-[220px] text-sm sm:text-base px-4 sm:px-6"
+              className="group min-w-[140px] sm:min-w-[200px] text-sm sm:text-base px-5 sm:px-6"
             >
               Book Service Now
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
 
             <a href="tel:7745046520">
-              <Button variant="heroOutline" size="xl" className="min-w-[130px] sm:min-w-[220px] text-sm sm:text-base px-4 sm:px-6">
+              <Button variant="heroOutline" size="xl" className="min-w-[140px] sm:min-w-[200px] text-sm sm:text-base px-5 sm:px-6">
                 <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
                 Call Now
               </Button>
             </a>
           </motion.div>
-
         </div>
       </div>
 
       {/* Trust Badges - Bottom Section */}
       <motion.div 
-        initial={{ y: 100, opacity: 0 }}
+        initial={{ y: 60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
+        transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
         className="absolute bottom-0 left-0 right-0 bg-white backdrop-blur-md py-4 md:py-6 border-t border-gray-200 shadow-lg"
       >
         <div className="section-container">
@@ -274,9 +165,9 @@ const Hero = () => {
             {trustBadges.map((badge, index) => (
               <motion.div
                 key={badge.label}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 + index * 0.1 }}
+                transition={{ delay: 0.6 + index * 0.08 }}
                 className="flex items-center gap-3 p-2 md:p-3"
               >
                 <div className="p-2 md:p-3 rounded-xl bg-sky-100">
